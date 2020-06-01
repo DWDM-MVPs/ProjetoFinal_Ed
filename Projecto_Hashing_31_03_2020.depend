@@ -1,0 +1,46 @@
+# depslib dependency file v1.0
+1586039745 source:c:\users\fmorgado\desktop\projecto_hashing_31_03_2020\principal.cpp
+	"Lista.h"
+	"Hashing.h"
+
+1586041341 c:\users\fmorgado\desktop\projecto_hashing_31_03_2020\lista.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1586033222 c:\users\fmorgado\desktop\projecto_hashing_31_03_2020\hashing.h
+	"Lista.h"
+
+1585662950 source:c:\users\fmorgado\desktop\projecto_hashing_31_03_2020\uteis.cpp
+	<stdio.h>
+	<stdlib.h>
+
+1586040400 source:c:\users\fmorgado\desktop\projecto_hashing_31_03_2020\hashing.cpp
+	"Hashing.h"
+
+1586033035 source:c:\users\fmorgado\desktop\projecto_hashing_31_03_2020\lista.cpp
+	"Lista.h"
+
+1590525107 source:c:\milkenm\escola\ipv\disciplinas\ed\projeto prático\hashing.cpp
+	"Hashing.h"
+
+1590525107 c:\milkenm\escola\ipv\disciplinas\ed\projeto prático\hashing.h
+	"Lista.h"
+
+1590525107 c:\milkenm\escola\ipv\disciplinas\ed\projeto prático\lista.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1590525107 source:c:\milkenm\escola\ipv\disciplinas\ed\projeto prático\lista.cpp
+	"Lista.h"
+
+1590525107 source:c:\milkenm\escola\ipv\disciplinas\ed\projeto prático\principal.cpp
+	"Lista.h"
+	"Hashing.h"
+
+1590525107 source:c:\milkenm\escola\ipv\disciplinas\ed\projeto prático\uteis.cpp
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
