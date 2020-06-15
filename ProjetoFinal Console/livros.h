@@ -1,22 +1,14 @@
-#ifndef NEW_H_INCLUDED
-#define NEW_H_INCLUDED
+#ifndef LIVROS_H_INCLUDED
+#define LIVROS_H_INCLUDED
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-#include "input.h"
+#include "funcoes.h"
+#include "structs.h"
 
-struct Livro
-{
-    int ISBN;
-    char Titulo[100];
-    char Autor[100];
-    char Area[100];
-    int AnoDePublicacao;
-};
-
-void ApagarLivro(Livro *l)
+int ApagarLivro(Livro *l)
 {
     free(l);
 }
@@ -42,13 +34,13 @@ Livro *WizardCriarLivro()
     char *area;
     int anoDePublicacao;
 
-    printf("Insira o ISBN do Livro: "); isbn = LerInteiro();
+    printf("Insira o ISBN do Livro: "); isbn = LerInteiro(NULL, NULL);
     printf("Insira o Título do Livro: "); titulo = LerString();
     printf("Insira o Autor do Livro: "); autor = LerString();
     printf("Insira a Area do Livro: "); area = LerString();
-    printf("Insira o Ano de Publicação do Livro: "); anoDePublicacao = LerInteiro();
+    printf("Insira o Ano de Publicação do Livro: "); anoDePublicacao = LerInteiro(NULL, AnoAtual());
 
     return CriarLivro(isbn, titulo, autor, area, anoDePublicacao);
 }
 
-#endif // NEW_H_INCLUDED
+#endif // LIVROS_H_INCLUDED

@@ -1,32 +1,38 @@
 # depslib dependency file v1.0
-1592242483 source:c:\milkenm\escola\ipv\github dwdm\projetofinal_ed\projetofinal console\main.cpp
+1592257349 source:c:\milkenm\escola\ipv\github dwdm\projetofinal_ed\projetofinal console\main.cpp
 	<iostream>
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<conio.h>
-	"livro.h"
-	"concelhos.h"
+	<time.h>
+	"structs.h"
+	"funcoes.h"
+	"livros.h"
 
-1592216850 c:\milkenm\escola\ipv\github dwdm\projetofinal_ed\projetofinal console\structs.h
-	<stdio.h>
-	<stdlib.h>
-	<string.h>
+1592256269 c:\milkenm\escola\ipv\github dwdm\projetofinal_ed\projetofinal console\structs.h
 
-1592247260 c:\milkenm\escola\ipv\github dwdm\projetofinal_ed\projetofinal console\livro.h
-	<stdio.h>
-	<stdlib.h>
-	<string.h>
-	"input.h"
+1592250238 c:\milkenm\escola\ipv\github dwdm\projetofinal_ed\projetofinal console\livro.h
 
-1592249360 c:\milkenm\escola\ipv\github dwdm\projetofinal_ed\projetofinal console\input.h
+1592250024 c:\milkenm\escola\ipv\github dwdm\projetofinal_ed\projetofinal console\input.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<ctype.h>
 
-1592240175 c:\milkenm\escola\ipv\github dwdm\projetofinal_ed\projetofinal console\concelhos.h
+1592250171 c:\milkenm\escola\ipv\github dwdm\projetofinal_ed\projetofinal console\concelhos.h
+
+1592257357 c:\milkenm\escola\ipv\github dwdm\projetofinal_ed\projetofinal console\funcoes.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
+	<ctype.h>
+	"structs.h"
+
+1592256273 c:\milkenm\escola\ipv\github dwdm\projetofinal_ed\projetofinal console\livros.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"funcoes.h"
+	"structs.h"
 

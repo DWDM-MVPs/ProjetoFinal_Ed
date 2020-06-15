@@ -1,15 +1,6 @@
-#ifndef CONCELHOS_H_INCLUDED
-#define CONCELHOS_H_INCLUDED
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-typedef struct concelho_t
-{
-    int ID;
-    char *Nome;
-} Concelho;
 
 void LerConcelhos()
 {
@@ -42,5 +33,3 @@ void LerConcelhos()
         }
     }
 }
-
-#endif // CONCELHOS_H_INCLUDED

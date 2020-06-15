@@ -3,9 +3,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include <conio.h>
+#include <time.h>
 
-#include "livro.h"
-#include "concelhos.h"
+#include "structs.h"
+#include "funcoes.h"
+#include "livros.h"
 
 // Guarda cenas no ficheiro
 void GuardarNoFicheiro()
@@ -52,14 +54,20 @@ void LerFicheiro()
 	}
 }
 
+void Testing()
+{
+    Livro *l = WizardCriarLivro();
+
+	GuardarNoFicheiro();
+	LerFicheiro();
+}
+
 int main()
 {
     // Imprimir chars portuguêses como 'ç', 'á', ...
     setlocale(LC_ALL, "Portuguese");
 
-    Livro *l = WizardCriarLivro();
+    Testing();
 
-	GuardarNoFicheiro();
-	LerFicheiro();
-    return 0;
+	return 0;
 }

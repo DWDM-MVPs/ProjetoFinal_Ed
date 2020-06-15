@@ -12,29 +12,17 @@
 				<Option compiler="gcc" />
 			</Target>
 		</Build>
-		<Unit filename="concelhos.h">
+		<Unit filename="concelhos.cpp">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
-		<Unit filename="dados.h">
+		<Unit filename="funcoes.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
-		<Unit filename="distritos.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="ficheiro.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="freguesias.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="input.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="livro.h">
+		<Unit filename="livros.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="main.cpp" />
-		<Unit filename="requisitante.h">
+		<Unit filename="structs.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Extensions>
