@@ -1,0 +1,19 @@
+# depslib dependency file v1.0
+1592220163 source:c:\milkenm\escola\ipv\github dwdm\projetofinal_ed\projetofinal console\main.cpp
+	<iostream>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<conio.h>
+	"livro.h"
+
+1592216850 c:\milkenm\escola\ipv\github dwdm\projetofinal_ed\projetofinal console\structs.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1592224079 c:\milkenm\escola\ipv\github dwdm\projetofinal_ed\projetofinal console\livro.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+

@@ -12,7 +12,13 @@
 				<Option compiler="gcc" />
 			</Target>
 		</Build>
+		<Unit filename="livro.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
 		<Unit filename="main.cpp" />
+		<Unit filename="requisitante.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

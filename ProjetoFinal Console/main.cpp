@@ -1,23 +1,24 @@
 #include <iostream>
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
+#include <string.h>
 #include <conio.h>
 
-//Guarda cenas no ficheiro
-int SaveInFile()
+#include "livro.h"
+
+// Guarda cenas no ficheiro
+void GuardarNoFicheiro()
 {
    char nome[50];
    int numCon, i, num;
 
-   printf("Numero de concelhos: ");
+   printf("Número de concelhos: ");
    scanf("%d", &num);
 
-   FILE *fptr;
-   fptr = (fopen("dados\\test.txt", "w"));
-   if(fptr == NULL)
+   FILE *file = (fopen("dados\\test.txt", "w"));
+   if(file == NULL)
    {
-       printf("Error!");
+       printf("Error! File not found.");
        getch();
    }
 
@@ -29,59 +30,35 @@ int SaveInFile()
       printf("Introduza o numero do concelho: ");
       scanf("%d", &numCon);
 
-      fprintf(fptr,"\nNome: %s \nNumeroConcelho: %d \n", nome, numCon);
+      fprintf(file,"\nNome: %s \nNumeroConcelho: %d \n", nome, numCon);
    }
 
-   fclose(fptr);
-   return 0;
+   fclose(file);
 }
 
-//Abre e le as cenas no ficheiro
-int LerFicheiro(){
+// Abre e lê as cenas do ficheiro
+void LerFicheiro()
+{
 	int c;
-	FILE *file;
-	file = fopen("dados\\test.txt", "r");
-	if (file) {
-    while ((c = getc(file)) != EOF)
+	FILE *file = fopen("dados\\test.txt", "r");
+
+	if (file)
+    {
+        while ((c = getc(file)) != EOF)
+
         putchar(c);
     	fclose(file);
 	}
 }
-char* ReadFile(char *filename)
-{
-   char *buffer = NULL;
-   int string_size, read_size;
-   FILE *handler = fopen(filename, "r");
-
-   if (handler)
-   {
-       fseek(handler, 0, SEEK_END);
-       string_size = ftell(handler);
-       rewind(handler);
-       buffer = (char*) malloc(sizeof(char) * (string_size + 1) );
-       read_size = fread(buffer, sizeof(char), string_size, handler);
-       buffer[string_size] = '\0';
-
-       if (string_size != read_size)
-       {
-           free(buffer);
-           buffer = NULL;
-       }
-       fclose(handler);
-    }
-
-    return buffer;
-}
 
 int main()
 {
+    // Imprimir chars portuguêses como 'ç', 'á', ...
+    setlocale(LC_ALL, "Portuguese");
+
+    Livro *l = WizardCriarLivro();
+
 	SaveInFile();
-    char *string = ReadFile((char *)"dados\\test.txt");
-    if (string)
-    {
-        puts(string);
-        free(string);
-    }
+	LerFicheiro();
     return 0;
 }
-

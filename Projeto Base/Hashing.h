@@ -10,13 +10,13 @@ typedef struct no_has
     char CHAVE[20];
     struct no_has *Prox_Chave;
     Lista *LVirus;
-}NO_HAS;
+} NO_HAS;
 
 typedef struct
 {
     NO_HAS *Inicio;
     int NUM_CHAVES;
-}Hashing;
+} Hashing;
 
 
 
