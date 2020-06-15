@@ -130,7 +130,7 @@ int Menu()
 
 int main()
 {
-    printf("INICIO: Pratico \n\n");
+    printf("INICIO: PRatico \n\n");
     Mochila *Sacola_TimTim = CriarMochila();
     Load(Sacola_TimTim);
     int OP = 0;
@@ -149,8 +149,8 @@ int main()
     }while (OP != 0);
     DestruirMochila(Sacola_TimTim);
 
-    printf("FIM: Pratico \n\n");
-    return 0;
+    printf("FIM: PRatico \n\n");
+    return 1;
 }
 
 

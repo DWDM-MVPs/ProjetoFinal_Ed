@@ -1,27 +1,38 @@
 #ifndef LISTA_H_INCLUDED
 #define LISTA_H_INCLUDED
 
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-typedef struct livro
+typedef struct virus
 {
     int CODIGO;
-    char *NOME;
-    char *CIDADE;
-} Livro, Virus;
+    char NOME[100];
+    char CIDADE[50];
+    //char *NOME;
+    // char *CIDADE;
+}Virus;
+
+
+/*
+JOSE FRANCISCO M. MORGADOXXXXXXXXXXXXXXXXXXX
+IVAN  SD SD SD S DSD  DSD S DS DS D XXXXXXXX
+JORGE BEM LOUREIRO MATOS XXXXXXXXXXXXXXXXXXX
+CARLOS SIMOESXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+*/
 
 typedef struct no
 {
-    Livro *Info;
+    Virus *Info;
     struct no *Prox;
-} No, NO;
+}NO;
 
 typedef struct lista
 {
-    No *Inicio;
+    NO *Inicio;
     int NEL;
-} Lista;
-
+}Lista;
 #endif // LISTA_H_INCLUDED

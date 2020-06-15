@@ -5,6 +5,7 @@
 #include <conio.h>
 
 #include "livro.h"
+#include "concelhos.h"
 
 // Guarda cenas no ficheiro
 void GuardarNoFicheiro()
@@ -58,7 +59,7 @@ int main()
 
     Livro *l = WizardCriarLivro();
 
-	SaveInFile();
+	GuardarNoFicheiro();
 	LerFicheiro();
     return 0;
 }

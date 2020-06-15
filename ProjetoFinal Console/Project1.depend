@@ -1,18 +1,31 @@
 # depslib dependency file v1.0
-1592220163 source:c:\milkenm\escola\ipv\github dwdm\projetofinal_ed\projetofinal console\main.cpp
+1592242483 source:c:\milkenm\escola\ipv\github dwdm\projetofinal_ed\projetofinal console\main.cpp
 	<iostream>
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<conio.h>
 	"livro.h"
+	"concelhos.h"
 
 1592216850 c:\milkenm\escola\ipv\github dwdm\projetofinal_ed\projetofinal console\structs.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 
-1592224079 c:\milkenm\escola\ipv\github dwdm\projetofinal_ed\projetofinal console\livro.h
+1592247260 c:\milkenm\escola\ipv\github dwdm\projetofinal_ed\projetofinal console\livro.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"input.h"
+
+1592249360 c:\milkenm\escola\ipv\github dwdm\projetofinal_ed\projetofinal console\input.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+
+1592240175 c:\milkenm\escola\ipv\github dwdm\projetofinal_ed\projetofinal console\concelhos.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>

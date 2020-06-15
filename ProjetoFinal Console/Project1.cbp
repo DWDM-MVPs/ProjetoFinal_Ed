@@ -12,6 +12,24 @@
 				<Option compiler="gcc" />
 			</Target>
 		</Build>
+		<Unit filename="concelhos.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="dados.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="distritos.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="ficheiro.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="freguesias.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="input.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
 		<Unit filename="livro.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>

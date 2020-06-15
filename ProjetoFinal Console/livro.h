@@ -5,23 +5,26 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef struct livro
+#include "input.h"
+
+struct Livro
 {
     int ISBN;
     char Titulo[100];
     char Autor[100];
     char Area[100];
     int AnoDePublicacao;
-} Livro;
+};
 
 void ApagarLivro(Livro *l)
 {
     free(l);
 }
 
-Livro *CriarLivro(int isbn, const char *titulo, const char *autor, const char *area, int anoDePublicacao)
+Livro *CriarLivro(int isbn, char *titulo, char *autor, char *area, int anoDePublicacao)
 {
     Livro *livro = (Livro *)malloc(sizeof(Livro));
+
     livro->ISBN = isbn;
     strcpy(livro->Titulo, titulo);
     strcpy(livro->Autor, autor);
@@ -34,16 +37,16 @@ Livro *CriarLivro(int isbn, const char *titulo, const char *autor, const char *a
 Livro *WizardCriarLivro()
 {
     int isbn;
-    char titulo[100];
-    char autor[100];
-    char area[100];
+    char *titulo;
+    char *autor;
+    char *area;
     int anoDePublicacao;
 
-    printf("Insira o ISBN do Livro: "); scanf("%d", &isbn);
-    printf("Insira o Título do Livro: "); scanf("%c", &titulo);
-    printf("Insira o Autor do Livro: "); scanf("%c", &autor);
-    printf("Insira a Area do Livro: "); scanf("%c", &area);
-    printf("Insira o Ano de Publicação do Livro: "); scanf("%i", &anoDePublicacao);
+    printf("Insira o ISBN do Livro: "); isbn = LerInteiro();
+    printf("Insira o Título do Livro: "); titulo = LerString();
+    printf("Insira o Autor do Livro: "); autor = LerString();
+    printf("Insira a Area do Livro: "); area = LerString();
+    printf("Insira o Ano de Publicação do Livro: "); anoDePublicacao = LerInteiro();
 
     return CriarLivro(isbn, titulo, autor, area, anoDePublicacao);
 }
