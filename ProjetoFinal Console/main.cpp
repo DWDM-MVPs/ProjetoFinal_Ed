@@ -14,7 +14,7 @@ int SaveInFile()
    scanf("%d", &num);
 
    FILE *fptr;
-   fptr = (fopen("C:\\Users\\Jak\\Desktop\\ProjetoFinal2\\test.txt", "w"));
+   fptr = (fopen("dados\\test.txt", "w"));
    if(fptr == NULL)
    {
        printf("Error!");
@@ -40,7 +40,7 @@ int SaveInFile()
 int LerFicheiro(){
 	int c;
 	FILE *file;
-	file = fopen("C:\\Users\\Jak\\Desktop\\ProjetoFinal2\\test.txt", "r");
+	file = fopen("dados\\test.txt", "r");
 	if (file) {
     while ((c = getc(file)) != EOF)
         putchar(c);
@@ -76,7 +76,7 @@ char* ReadFile(char *filename)
 int main()
 {
 	SaveInFile();
-    char *string = ReadFile((char *)"C:\\Users\\Jak\\Desktop\\ProjetoFinal2\\test.txt");
+    char *string = ReadFile((char *)"dados\\test.txt");
     if (string)
     {
         puts(string);
