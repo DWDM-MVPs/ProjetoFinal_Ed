@@ -11,3 +11,16 @@ LIVRO *Criar_Livro()
 
     return livro;
 }
+
+LIVRO *Criar_Livro_Preenchido(int isbn, char *titulo, char *autor, char *area, int anoDePublicacao)
+{
+    LIVRO *livro = Criar_Livro();
+
+    livro->ISBN = isbn;
+    strcpy(livro->Titulo, titulo);
+    strcpy(livro->Autor, autor);
+    strcpy(livro->Area, area);
+    livro->AnoDePublicacao = anoDePublicacao;
+
+    return livro;
+}
