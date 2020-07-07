@@ -24,3 +24,20 @@ LIVRO *Criar_Livro_Preenchido(int isbn, char *titulo, char *autor, char *area, i
 
     return livro;
 }
+
+LIVRO *Wizard_Livro()
+{
+    int isbn;
+    char *titulo;
+    char *autor;
+    char *area;
+    int anoDePublicacao;
+
+    printf("Insira o ISBN do Livro: "); isbn = LerInteiro(NULL, NULL);
+    printf("Insira o T�tulo do Livro: "); titulo = LerString();
+    printf("Insira o Autor do Livro: "); autor = LerString();
+    printf("Insira a Area do Livro: "); area = LerString();
+    printf("Insira o Ano de Publica��o do Livro: "); anoDePublicacao = LerInteiro(NULL, AnoAtual());
+
+    return Criar_Livro_Preenchido(isbn, titulo, autor, area, anoDePublicacao);
+}
