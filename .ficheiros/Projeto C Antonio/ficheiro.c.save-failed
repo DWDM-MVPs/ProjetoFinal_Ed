@@ -1,0 +1,305 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+#include "hashing.h"
+#include <string.h>
+
+/** ---------- LISTAR TODOS OS DISTRITOS ---------- */
+
+void listarDist()
+{
+    FILE *fic;
+    char linha[120];
+    fic = fopen("Distritos.txt", "r");
+
+    if(!fic)
+    {
+        printf("\n>> Não foi possível abrir o ficheiro [Distritos.txt]\n");
+        return;
+    }
+
+    printf("\n\n--------------------------------------------------\n");
+    printf("-      Escolha o distrito correspondente         -");
+    printf("\n--------------------------------------------------\n\n");
+
+    while(!feof(fic))
+    {
+        if(fgets(linha, 120, fic) != NULL) /* Verifica se  leitura foi feita com sucesso */
+            printf(">> %s", linha);
+    }
+    printf("\n--------------------------------------------------\n");
+}
+
+
+/** ---------- LISTAR TODOS OS CONCELHOS, RELATIVOS A UM DADO DISTRITO ---------- */
+
+void listarConc(char *dist)
+{
+    if(!dist)
+    {
+        printf("\n>>O distrito n�o existe\n");
+        return;
+    }
+
+    FILE *fic;
+    char linha[120];
+    fic = fopen("Concelhos.txt", "r");
+    char distritoFich[3];
+
+    if(!fic)
+    {
+        printf("\n>> N�o foi poss�vel abrir o ficheiro [Concelhos.txt]\n");
+        return;
+    }
+
+    printf("\n\n--------------------------------------------------\n");
+    printf("-      Escolha o concelho correspondente         -");
+    printf("\n--------------------------------------------------\n\n");
+
+    while(!feof(fic))
+    {
+        if(fgets(linha, 120, fic) != NULL) /* Verifica se  leitura foi feita com sucesso */
+        {
+            /* Recupero o ID do distrito, dentro dos ID de concelhos */
+
+            int i;
+
+            for(i = 0; i < 2; i++)
+                distritoFich[i] = linha[i];
+
+            distritoFich[2] = '\0';
+
+            if(strcmp(distritoFich, dist) == 0) /* Verifica se existe o distrito no ficheiro */
+            {
+                for(i = 0; i < 2; i++)
+                    memmove(&linha[0], &linha[1], strlen(linha)); /* Permite remover o primeiro n� do distrito do ficheiro de concelhos (facilita a visualiza��o) */
+
+                printf(">> %s", linha);
+            }
+        }
+    }
+    printf("\n--------------------------------------------------\n");
+}
+
+/** ---------- LISTAR TODAS AS FREGUESIAS, RELATIVAS A UM DADO CONCELHO ---------- */
+
+void listarFreg(char *conc)
+{
+    if(!conc)
+    {
+        printf("\n>>O concelho n�o existe\n");
+        return;
+    }
+
+    FILE *fic;
+    char linha[120];
+    fic = fopen("Freguesias.txt", "r");
+    char concFich[5];
+
+    if(!fic)
+    {
+        printf("\n>> N�o foi poss�vel abrir o ficheiro [Freguesias.txt]\n");
+        return;
+    }
+
+    printf("\n\n--------------------------------------------------\n");
+    printf("-      Escolha a freguesia correspondente        -");
+    printf("\n--------------------------------------------------\n\n");
+
+    while(!feof(fic))
+    {
+        if(fgets(linha, 120, fic) != NULL) /* Verifica se  leitura foi feita com sucesso */
+        {
+            /* Recupero o ID do concelho, dentro dos ID de freguesia */
+
+            int i;
+
+            for(i = 0; i < 4; i++)
+                concFich[i] = linha[i];
+
+            concFich[4] = '\0';
+
+            if(strcmp(concFich, conc) == 0) /* Verifica se existe o concelho no ficheiro */
+            {
+                for(i = 0; i < 4; i++)
+                  memmove(&linha[0], &linha[1], strlen(linha)); /* Permite remover os 4 primeiros n� do ID de freguesia do ficheiro de freguesias (facilita a visualiza��o) */
+
+                printf(">> %s", linha);
+            }
+        }
+    }
+    printf("\n--------------------------------------------------\n");
+}
+
+/** ---------- LER O FICHEIRO DOS REQUISITANTES  ---------- */
+
+int lerFicheiroReq(HASHING *hashingDist, char *nomeFic)
+{
+    if(!hashingDist)
+    {
+        printf("\n>> O hashing de distritos n�o existe\n");
+        return 0;
+    }
+
+    FILE *fic;
+    char linha[120];
+    fic = fopen(nomeFic, "r");
+    char *info[4]; /* 0: ID / 1: Nome / 2: Data de nascimento / 3: ID freguesia */
+    char *erros[100];
+    char ultimoIdFich[10];
+
+    if(!fic)
+    {
+        printf("\n>> N�o foi poss�vel abrir o ficheiro [%s]\n", nomeFic);
+        return 0;
+    }
+
+    memset(erros, 0, sizeof(erros)); /* Limpar o array de erros */
+
+    while(!feof(fic))
+    {
+        if(fgets(linha, 120, fic) != NULL) /* Verifica se  leitura foi feita com sucesso */
+        {
+            int pos = 0;
+            char *elemento = strtok(linha, "\t");
+
+            while (elemento != NULL) /* Guardar toda a informa��o de um requisitante separada, no array info */
+            {
+                info[pos] = (char *)malloc((strlen(elemento) + 1) * sizeof(char));
+                strcpy(info[pos], elemento);
+                pos++;
+                elemento = strtok(NULL, "\t");
+            }
+
+            /* Validar o ID do requisitante */
+
+            int validadeID = validarIdReq(info[0]);
+
+            if(validadeID == 0)
+            {
+                registarErro(info[0], 1); /* C�digos de erro: 1: ID / 2: Data de nascimento / 3: ID freguesia */
+                strcat(erros, info[0]);
+                strcat(erros, ", ");
+            }
+
+            else /* O ID do requisitante � v�lido */
+            {
+                strcpy(ultimoIdFich, info[0]);
+
+                /* Validar a data de nascimento */
+
+                int validadeData = validarDataNasc(info[2]);
+
+                if(validadeData == 0)
+                {
+                    registarErro(info[2], 2); /* C�digos de erro: 1: ID / 2: Data de nascimento / 3: ID freguesia */
+                    strcat(erros, info[0]);
+                    strcat(erros, ", ");
+                }
+
+                else /* A data de nascimento � v�lida */
+                {
+                    int tam = strlen(info[3]);
+                    info[3][tam-1] = '\0';
+
+                    /* Validar o ID da freguesia */
+
+                    int validadeIDFreg = validarIDFreg(info[3], "Freguesias.txt");
+
+                    if(validadeIDFreg == 0)
+                    {
+                        registarErro(info[3], 3); /* C�digos de erro: 1: ID / 2: Data de nascimento / 3: ID freguesia */
+                        strcat(erros, info[0]);
+                        strcat(erros, ", ");
+                    }
+
+                    else /* O ID de freguesia � v�lido */
+                    {
+                        NODO *nodoReq = criarNodo();
+                        nodoReq->info = criarReq();
+                        REQUISITANTE *req = nodoReq->info;
+
+                        int tamID = strlen(info[0]);
+                        info[0][tamID] = '\0'; /* Adicionar char NULL no �ltimo */
+                        strcpy(req->id, info[0]); /* Inserir o ID do requisitante */
+
+                        strcpy(req->idFreguesia, info[3]); /* Inserir o ID de freguesia do requisitante */
+
+                        req->nome = info[1];
+
+                        int dia, mes, ano;
+                        int validadeFormato = sscanf(info[2], "%d-%d-%04d", &dia, &mes, &ano);
+                        req->diaNasc = dia; /*Inserir o dia de nascimento */
+                        req->mesNasc = mes; /*Inserir o mes de nascimento */
+                        req->anoNasc = ano; /*Inserir o ano de nascimento */
+
+                        inserirReq(hashingDist, nodoReq);
+                    }
+                }
+            }
+
+            /* Devemos libertar o espa�o alocado para o array info, excepto para o nome */
+
+            free(info[0]);
+            free(info[2]);
+            free(info[3]);
+        }
+    }
+    if(erros[0] != NULL)
+        printf("\n>> Requisitantes com erros: [%s]\n", erros);
+
+    return atoi(ultimoIdFich);
+}
+
+/** ---------- REGISTO DOS ERROS RELATIVOS Á LEITURA DOS REQUISITANTES NO FICHEIRO DE LOGS  ---------- */
+
+void registarErro(char *info, int codigo)
+{
+    if(!info)
+    {
+        printf("\n>> Ocorreu um erro na leitura da informa��o para o registo de erro\n");
+        return;
+    }
+
+    FILE *fic;
+    fic = fopen("logs.txt", "a");
+
+    if(!fic)
+    {
+        printf("\n>> N�o foi poss�vel abrir o ficheiro [logs.txt]\n");
+        return 0;
+    }
+
+    time_t currTime = time(NULL);
+    struct tm tm = *localtime(&currTime);
+    char mensagem[50];
+
+    fprintf(fic, "\n-------------------- %02d/%02d/%04d %02d:%02d:%02d --------------------\n", tm.tm_mday, tm.tm_mon + 1, tm.tm_year + 1900, tm.tm_hour, tm.tm_min, tm.tm_sec);
+
+    switch(codigo)
+    {
+        case 1:
+        {
+            strcpy(mensagem, "ID do requisitante inválido");
+            break;
+        }
+        case 2:
+        {
+            strcpy(mensagem, "Data de nascimento inválida");
+            break;
+        }
+        case 3:
+        {
+            strcpy(mensagem, "ID de freguesia inválido");
+            break;
+        }
+        default:
+        {
+            strcpy(mensagem, "Outro");
+            break;
+        }
+    }
+    fprintf(fic, "\nDetalhes: %s (%s)\n", info, mensagem);
+    fclose(fic);
+}

@@ -1,0 +1,237 @@
+# depslib dependency file v1.0
+1587726522 source:c:\users\dfigueiredo\desktop\projeto_biblioteca\projeto_biblioteca\hashing.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"hashing.h"
+
+1588094370 source:c:\users\dfigueiredo\desktop\projeto_biblioteca\projeto_biblioteca\lista.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	"hashing.h"
+	<string.h>
+	<locale.h>
+	<ctype.h>
+
+1587726237 source:c:\users\dfigueiredo\desktop\projeto_biblioteca\projeto_biblioteca\uteis.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1588093068 source:c:\users\dfigueiredo\desktop\projeto_biblioteca\projeto_biblioteca\ficheiro.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	"hashing.h"
+	<string.h>
+
+1587978712 c:\users\dfigueiredo\desktop\projeto_biblioteca\projeto_biblioteca\hashing.h
+	"lista.h"
+
+1587740765 c:\users\dfigueiredo\desktop\projeto_biblioteca\projeto_biblioteca\lista.h
+	<time.h>
+
+1588097264 source:c:\users\dfigueiredo\desktop\projeto_biblioteca\projeto_biblioteca\main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<string.h>
+	<locale.h>
+	<ctype.h>
+	"hashing.h"
+
+1587978536 c:\users\dfigueiredo\desktop\projeto_biblioteca\projeto_biblioteca\header.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	"hashing.h"
+	<string.h>
+	<locale.h>
+	<ctype.h>
+
+1588097334 source:c:\users\dfigueiredo\desktop\projeto_biblioteca\projeto_biblioteca\requisitante.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<string.h>
+	<locale.h>
+	<ctype.h>
+	"hashing.h"
+	"lista.h"
+
+1589556274 source:c:\users\dfigueiredo\desktop\estrutura de dados\prática\projeto_biblioteca\projeto_biblioteca\ficheiro.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	"hashing.h"
+	<string.h>
+
+1587978712 c:\users\dfigueiredo\desktop\estrutura de dados\prática\projeto_biblioteca\projeto_biblioteca\hashing.h
+	"lista.h"
+
+1588931710 c:\users\dfigueiredo\desktop\estrutura de dados\prática\projeto_biblioteca\projeto_biblioteca\lista.h
+	<time.h>
+
+1589546251 source:c:\users\dfigueiredo\desktop\estrutura de dados\prática\projeto_biblioteca\projeto_biblioteca\hashing.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"hashing.h"
+
+1589557339 source:c:\users\dfigueiredo\desktop\estrutura de dados\prática\projeto_biblioteca\projeto_biblioteca\lista.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	"hashing.h"
+	<string.h>
+	<locale.h>
+	<ctype.h>
+
+1589557532 source:c:\users\dfigueiredo\desktop\estrutura de dados\prática\projeto_biblioteca\projeto_biblioteca\main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<string.h>
+	<locale.h>
+	<ctype.h>
+	"hashing.h"
+
+1589555490 source:c:\users\dfigueiredo\desktop\estrutura de dados\prática\projeto_biblioteca\projeto_biblioteca\requisitante.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<string.h>
+	<locale.h>
+	<ctype.h>
+	"hashing.h"
+	"lista.h"
+
+1589542918 source:c:\users\dfigueiredo\desktop\estrutura de dados\prática\projeto_biblioteca\projeto_biblioteca\uteis.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+
+1589555897 source:c:\users\dfigueiredo\desktop\estrutura de dados\prática\projeto_biblioteca\projeto_biblioteca\livro.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<string.h>
+	<locale.h>
+	<ctype.h>
+	"hashing.h"
+	"lista.h"
+	<conio.h>
+
+1589555846 source:c:\users\dfigueiredo\desktop\estrutura de dados\prática\projeto_biblioteca\projeto_biblioteca\requisicao.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<string.h>
+	<locale.h>
+	<ctype.h>
+	"hashing.h"
+	"lista.h"
+
+1589555128 source:c:\users\dfigueiredo\desktop\estrutura de dados\prática\projeto_biblioteca\projeto_biblioteca\menu.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<string.h>
+	<locale.h>
+	<ctype.h>
+	"hashing.h"
+	"lista.h"
+
+1589653104 source:c:\users\danierodrigues\desktop\matérias do curso\estrutura de dados\projetofinalissimo\projeto_biblioteca\ficheiro.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	"hashing.h"
+	<string.h>
+
+1587978712 c:\users\danierodrigues\desktop\matérias do curso\estrutura de dados\projetofinalissimo\projeto_biblioteca\hashing.h
+	"lista.h"
+
+1588931710 c:\users\danierodrigues\desktop\matérias do curso\estrutura de dados\projetofinalissimo\projeto_biblioteca\lista.h
+	<time.h>
+
+1589546251 source:c:\users\danierodrigues\desktop\matérias do curso\estrutura de dados\projetofinalissimo\projeto_biblioteca\hashing.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"hashing.h"
+
+1589557339 source:c:\users\danierodrigues\desktop\matérias do curso\estrutura de dados\projetofinalissimo\projeto_biblioteca\lista.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	"hashing.h"
+	<string.h>
+	<locale.h>
+	<ctype.h>
+
+1589650269 source:c:\users\danierodrigues\desktop\matérias do curso\estrutura de dados\projetofinalissimo\projeto_biblioteca\livro.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<string.h>
+	<locale.h>
+	<ctype.h>
+	"hashing.h"
+	"lista.h"
+	<conio.h>
+
+1589652866 source:c:\users\danierodrigues\desktop\matérias do curso\estrutura de dados\projetofinalissimo\projeto_biblioteca\main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<string.h>
+	<locale.h>
+	<ctype.h>
+	"hashing.h"
+
+1589652487 source:c:\users\danierodrigues\desktop\matérias do curso\estrutura de dados\projetofinalissimo\projeto_biblioteca\menu.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<string.h>
+	<locale.h>
+	<ctype.h>
+	"hashing.h"
+	"lista.h"
+
+1589652594 source:c:\users\danierodrigues\desktop\matérias do curso\estrutura de dados\projetofinalissimo\projeto_biblioteca\requisicao.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<string.h>
+	<locale.h>
+	<ctype.h>
+	"hashing.h"
+	"lista.h"
+
+1589555490 source:c:\users\danierodrigues\desktop\matérias do curso\estrutura de dados\projetofinalissimo\projeto_biblioteca\requisitante.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<string.h>
+	<locale.h>
+	<ctype.h>
+	"hashing.h"
+	"lista.h"
+
+1589542918 source:c:\users\danierodrigues\desktop\matérias do curso\estrutura de dados\projetofinalissimo\projeto_biblioteca\uteis.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+
