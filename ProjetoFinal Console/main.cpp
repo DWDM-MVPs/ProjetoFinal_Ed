@@ -5,11 +5,9 @@
 #include <conio.h>
 #include <time.h>
 
-#include "structs.h"
-#include "funcoes.h"
-#include "livros.h"
-
 int main()
 {
+    setlocale(LC_ALL, "Portuguese");
+
 	return 0;
 }
