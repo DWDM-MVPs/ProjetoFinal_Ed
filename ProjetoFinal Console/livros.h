@@ -1,46 +1,42 @@
-#ifndef LIVROS_H_INCLUDED
-#define LIVROS_H_INCLUDED
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-#include "funcoes.h"
-#include "structs.h"
-
-int ApagarLivro(Livro *l)
+typedef struct Livro
 {
-    free(l);
-}
+    int ISBN;
+    char Titulo[100];
+    char Autor[100];
+    char Area[100];
+    int AnoDePublicacao;
+} LIVRO;
 
-Livro *CriarLivro(int isbn, char *titulo, char *autor, char *area, int anoDePublicacao)
+
+
+typedef struct No_Livro
 {
-    Livro *livro = (Livro *)malloc(sizeof(Livro));
+    LIVRO *Livro;
+    struct No_Livro *Seguinte;
+} NO_LIVRO;
 
-    livro->ISBN = isbn;
-    strcpy(livro->Titulo, titulo);
-    strcpy(livro->Autor, autor);
-    strcpy(livro->Area, area);
-    livro->AnoDePublicacao = anoDePublicacao;
 
-    return livro;
-}
 
-Livro *WizardCriarLivro()
+typedef struct Lista_Livros
 {
-    int isbn;
-    char *titulo;
-    char *autor;
-    char *area;
-    int anoDePublicacao;
+    NO_LIVRO *Inicio;
+    int Quantidade;
+} LISTA_LIVROS;
 
-    printf("Insira o ISBN do Livro: "); isbn = LerInteiro(NULL, NULL);
-    printf("Insira o Título do Livro: "); titulo = LerString();
-    printf("Insira o Autor do Livro: "); autor = LerString();
-    printf("Insira a Area do Livro: "); area = LerString();
-    printf("Insira o Ano de Publicação do Livro: "); anoDePublicacao = LerInteiro(NULL, AnoAtual());
 
-    return CriarLivro(isbn, titulo, autor, area, anoDePublicacao);
-}
 
-#endif // LIVROS_H_INCLUDED
+typedef struct No_Hashing_Livro
+{
+    LISTA_LIVROS ListaLivros;
+    struct No_Hashing_Livro *Seguinte;
+    int Requisicoes;
+    char Nome[100];
+} NO_HASHING_LIVRO;
+
+
+
+typedef struct Hashing_Livros
+{
+    NO_HASHING_LIVRO *Inicio;
+    int Quantidade;
+} HASHING_LIVROS;
