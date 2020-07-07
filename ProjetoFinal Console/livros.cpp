@@ -69,3 +69,16 @@ LISTA_LIVROS *Criar_ListaLivros()
 
     return lista_livros;
 }
+
+
+
+
+
+NO_HASHING_LIVRO *Criar_NoHashingLivro()
+{
+    NO_HASHING_LIVRO *no_hashing_livro = (NO_HASHING_LIVRO *)malloc(sizeof(NO_HASHING_LIVRO));
+
+    no_hashing_livro->ListaLivros = NULL;
+    no_hashing_livro->Seguinte = NULL;
+    no_hashing_livro->Requisicoes = 0;
+}
