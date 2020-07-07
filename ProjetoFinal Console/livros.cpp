@@ -41,3 +41,17 @@ LIVRO *Wizard_Livro()
 
     return Criar_Livro_Preenchido(isbn, titulo, autor, area, anoDePublicacao);
 }
+
+
+
+
+
+NO_LIVRO *Criar_NoLivro()
+{
+    NO_LIVRO *no_livro = (NO_LIVRO *)malloc(sizeof(NO_LIVRO));
+
+    no_livro->Livro = NULL;
+    no_livro->Seguinte = NULL;
+
+    return no_livro;
+}
