@@ -82,3 +82,15 @@ NO_HASHING_LIVRO *Criar_NoHashingLivro()
     no_hashing_livro->Seguinte = NULL;
     no_hashing_livro->Requisicoes = 0;
 }
+
+
+
+
+
+HASHING_LIVRO *Criar_HashingLivro()
+{
+    HASHING_LIVRO *hashing_livro = (HASHING_LIVRO *)malloc(sizeof(HASHING_LIVRO));
+
+    hashing_livro->Start = NULL;
+    hashing_livro->Quantidade = 0;
+}
