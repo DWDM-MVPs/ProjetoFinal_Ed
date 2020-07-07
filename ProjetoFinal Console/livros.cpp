@@ -55,3 +55,17 @@ NO_LIVRO *Criar_NoLivro()
 
     return no_livro;
 }
+
+
+
+
+
+LISTA_LIVROS *Criar_ListaLivros()
+{
+    LISTA_LIVROS *lista_livros = (LISTA_LIVROS *)malloc(sizeof(LISTA_LIVROS));
+
+    lista_livros->Start = NULL;
+    lista_livros->Quantidade = 0;
+
+    return lista_livros;
+}
