@@ -151,6 +151,8 @@ void AdicionarLivroNaLista(LISTA_LIVROS *lista_livros, LIVRO *livro)
     }
     // METE O LIVRO CRIADO AQUI NO INICIO DA LISTA
     lista_livros->Inicio = no_livro;
+
+    lista_livros->QuantidadeDeLivros = lista_livros->QuantidadeDeLivros + 1;
 }
 
 
@@ -217,7 +219,7 @@ void AdicionarLivro(HASHING_LIVROS *hashing_livros, LIVRO *livro)
             hashing_livros->Inicio = no_hashing_livro;
         }
     }
-    // CASO EXISTA
+    // CASO EXISTA A CATEGORIA
     else
     {
         // METE LA O LIVRINHO
@@ -248,7 +250,7 @@ void MostrarLivro(LIVRO *livro)
 // USA O MOSTRARLIVRO() PARA LISTAR TODOS OS LIVROS QUE EXISTEM
 void MostrarLivrosPorArea(HASHING_LIVROS *hashing_livros)
 {
-    printf("\n\n========== MOSTRAR LIVROS POR AREA ==========\n\n");
+    printf("\n\n========== MOSTRAR LIVROS POR AREA ==========\n");
 
     // PARA FAZER LOOP PELAS CATEGORIAS
     NO_HASHING_LIVRO *no_hashing_livro = hashing_livros->Inicio;
@@ -290,12 +292,13 @@ void MostrarAreaComMaisLivros(HASHING_LIVROS *hashing_livros)
 
     // PARA GUARDAR A CATEGORIA COM MAIS LIVROS
     NO_HASHING_LIVRO *maior_categoria = NULL;
+    int maxLivros = 0;
 
     // FAZ LOOP PELAS CATEGORIAS
     while (categoria)
     {
         // SE A QUANTIDADE DE LIVROS NA CATEGORIA FOI MAIOR DO QUE A QUANTIDADE DE LIVROS DA ATUAL CATEGORIA COM MAIS LIVROS
-        if (maior_categoria->ListaDeLivros->QuantidadeDeLivros > maior_categoria->ListaDeLivros->QuantidadeDeLivros)
+        if (categoria->ListaDeLivros->QuantidadeDeLivros > maxLivros)
         {
             // GUARDA A CATEGORIA NA VARIAVEL
             maior_categoria = categoria;
@@ -304,6 +307,8 @@ void MostrarAreaComMaisLivros(HASHING_LIVROS *hashing_livros)
         // SELECIONA A PROXIMA CATEGORIA
         categoria = categoria->Seguinte;
     }
+
+    printf("Categoria com mais livros: %s", maior_categoria->Nome);
 }
 
 
