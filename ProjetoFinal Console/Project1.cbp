@@ -12,8 +12,6 @@
 				<Option compiler="gcc" />
 			</Target>
 		</Build>
-		<Unit filename="funcoes.h" />
-		<Unit filename="livros.cpp" />
 		<Unit filename="livros.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
