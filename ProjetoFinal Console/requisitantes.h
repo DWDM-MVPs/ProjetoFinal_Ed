@@ -1,4 +1,4 @@
-typedef struct Requisitante
+struct REQUISITANTE
 {
     char ID[9];
     char Nome[100];
@@ -6,20 +6,29 @@ typedef struct Requisitante
     int MesNascimento;
     int AnoNascimento;
     char ID_Freguesia[6];
-} REQUISITANTE;
+};
 
 
 
-typedef struct No_Requisitante
+struct NO_REQUISITANTE
 {
     REQUISITANTE *Requisitante;
     struct No_Requisitante *Seguinte;
-} NO_REQUISITANTE;
+};
 
 
 
-typedef struct Lista_Requisitantes
+struct LISTA_REQUISITANTES
 {
     NO_REQUISITANTE *Start;
     int Quantidade;
-} LISTA_REQUISITANTES;
+};
+
+
+
+struct DATA
+{
+    int Dia;
+    int Mes;
+    int Ano;
+};

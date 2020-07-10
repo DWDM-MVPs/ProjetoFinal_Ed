@@ -1,42 +1,48 @@
-typedef struct Livro
+// LIVRO
+struct LIVRO
 {
     int ISBN;
     char Titulo[100];
     char Autor[100];
     char Area[100];
     int AnoDePublicacao;
-} LIVRO;
+    int NumeroDeRequisicoes;
+};
 
 
 
-typedef struct No_Livro
+// ELEMENTOS DA LISTA DE LIVROS
+struct NO_LIVRO
 {
     LIVRO *Livro;
-    struct No_Livro *Seguinte;
-} NO_LIVRO;
+    NO_LIVRO *Seguinte;
+};
 
 
 
-typedef struct Lista_Livros
+// LISTA DE LIVROS
+struct LISTA_LIVROS
 {
     NO_LIVRO *Inicio;
-    int Quantidade;
-} LISTA_LIVROS;
+    int QuantidadeDeLivros;
+};
 
 
 
-typedef struct No_Hashing_Livro
+// AREA / CATEGORIA
+struct NO_HASHING_LIVRO
 {
-    LISTA_LIVROS ListaLivros;
-    struct No_Hashing_Livro *Seguinte;
-    int Requisicoes;
     char Nome[100];
-} NO_HASHING_LIVRO;
+    int NumeroDeRequisicoes;
+    LISTA_LIVROS *ListaDeLivros;
+    NO_HASHING_LIVRO *Seguinte;
+};
 
 
 
-typedef struct Hashing_Livros
+// LISTA DAS AREAS / CATEGORIAS
+struct HASHING_LIVROS
 {
     NO_HASHING_LIVRO *Inicio;
     int Quantidade;
-} HASHING_LIVROS;
+};

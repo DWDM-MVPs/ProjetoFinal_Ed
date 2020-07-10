@@ -12,17 +12,13 @@
 				<Option compiler="gcc" />
 			</Target>
 		</Build>
-		<Unit filename="concelhos.cpp">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="funcoes.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
+		<Unit filename="funcoes.h" />
+		<Unit filename="livros.cpp" />
 		<Unit filename="livros.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="main.cpp" />
-		<Unit filename="structs.h">
+		<Unit filename="requisitantes.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Extensions>

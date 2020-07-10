@@ -1,14 +1,13 @@
 # depslib dependency file v1.0
-1592257349 source:c:\milkenm\escola\ipv\github dwdm\projetofinal_ed\projetofinal console\main.cpp
+1594336244 source:c:\milkenm\escola\ipv\github dwdm\projetofinal_ed\projetofinal console\main.cpp
 	<iostream>
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<conio.h>
 	<time.h>
-	"structs.h"
-	"funcoes.h"
 	"livros.h"
+	"requisitantes.h"
 
 1592256269 c:\milkenm\escola\ipv\github dwdm\projetofinal_ed\projetofinal console\structs.h
 
@@ -22,17 +21,21 @@
 
 1592250171 c:\milkenm\escola\ipv\github dwdm\projetofinal_ed\projetofinal console\concelhos.h
 
-1592257357 c:\milkenm\escola\ipv\github dwdm\projetofinal_ed\projetofinal console\funcoes.h
+1594332614 c:\milkenm\escola\ipv\github dwdm\projetofinal_ed\projetofinal console\funcoes.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<ctype.h>
-	"structs.h"
+	<time.h>
 
-1592256273 c:\milkenm\escola\ipv\github dwdm\projetofinal_ed\projetofinal console\livros.h
+1594335706 c:\milkenm\escola\ipv\github dwdm\projetofinal_ed\projetofinal console\livros.h
+
+1594332555 source:c:\milkenm\escola\ipv\github dwdm\projetofinal_ed\projetofinal console\livros.cpp
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
+	"livros.h"
 	"funcoes.h"
-	"structs.h"
+
+1594325220 c:\milkenm\escola\ipv\github dwdm\projetofinal_ed\projetofinal console\requisitantes.h
 
