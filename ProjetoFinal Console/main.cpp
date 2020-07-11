@@ -6,68 +6,13 @@
 #include <time.h>
 
 #include "livros.h"
-#include "requisitantes.h"
 
 #define PAUSE printf("\n\n\n\n\n"); system("PAUSE");
 #define CLS system("CLS");
 #define PAUSE_CLS PAUSE CLS;
 
-#define MSG_SUCESSO "Pedido efetuado com sucesso!";
-
-
-
-
 
 static LISTA_CATEGORIAS *hl;
-
-
-
-
-
-LIVRO *Criar_Livro()
-{
-    LIVRO *livro = (LIVRO *)malloc(sizeof(LIVRO));
-
-    livro->ISBN = 0;
-    livro->AnoDePublicacao = 0;
-    livro->NumeroDeRequisicoes = 0;
-
-    return livro;
-}
-
-LISTA_LIVROS *Criar_ListaLivros()
-{
-    LISTA_LIVROS *lista_livros = (LISTA_LIVROS *)malloc(sizeof(LISTA_LIVROS));
-
-    lista_livros->Inicio = NULL;
-    lista_livros->QuantidadeDeLivros = 0;
-
-    return lista_livros;
-}
-
-CATEGORIA *Criar_Categoria()
-{
-    CATEGORIA *categoria = (CATEGORIA *)malloc(sizeof(CATEGORIA));
-
-    categoria->Seguinte = NULL;
-    categoria->ListaDeLivros = NULL;
-    categoria->NumeroDeRequisicoes = 0;
-
-    return categoria;
-}
-
-LISTA_CATEGORIAS *Criar_ListaCategorias()
-{
-    LISTA_CATEGORIAS *lista_categorias = (LISTA_CATEGORIAS *)malloc(sizeof(LISTA_CATEGORIAS));
-
-    lista_categorias->Inicio = NULL;
-    lista_categorias->Quantidade = 0;
-
-    return lista_categorias;
-}
-
-
-
 
 
 
@@ -85,155 +30,15 @@ void ImprimirMenu(char titulo[100])
 
 
 
-bool AnoBissexto(int ano)
-{
-     return ano % 4 == 0 && ano % 100 != 0 || ano % 400 == 0;
-}
 
 
 
 
 
-bool DataValida(DATA *data)
-{
-    // VERIFICA OS DIAS MAXIMOS PARA CADA MES
-    if (data->Dia < 1 || data->Dia > 31)
-    {
-        return false;
-    }
-    if (data->Mes < 1 || data->Mes > 12)
-    {
-        return false;
-    }
-    // ANO BISSEIXTO (COISO DE FEVEREIRO)
-    if (data->Mes == 2)
-    {
-        if (AnoBissexto(data->Ano))
-        {
-            return (data->Dia <= 29);
-        }
-        else
-        {
-            return (data->Dia <= 28);
-        }
-    }
-    // MESES QUE SO TEM 30 DIAS
-    if (data->Mes == 4 || data->Mes == 6 || data->Mes == 9 || data->Mes == 11)
-    {
-        return (data->Dia <= 30);
-    }
-
-    // SE NAO FALHAR NADA DEVOLVE TRUE, PORQUE A DATA E VALIDA
-    return true;
-}
 
 
 
 
-
-LIVRO *Criar_Livro_Preenchido(int isbn, char *titulo, char *autor, char *area, int anoDePublicacao, int numeroDeRequisicoes)
-{
-    LIVRO *livro = Criar_Livro();
-
-    livro->ISBN = isbn;
-    strcpy(livro->Titulo, titulo);
-    strcpy(livro->Autor, autor);
-    strcpy(livro->Area, area);
-    livro->AnoDePublicacao = anoDePublicacao;
-    livro->NumeroDeRequisicoes = numeroDeRequisicoes;
-
-    return livro;
-}
-
-
-
-
-
-// ADICIONA UM LIVRO A LISTA
-void AdicionarLivroNaLista(LISTA_LIVROS *lista_livros, LIVRO *livro)
-{
-    if (!lista_livros || !livro) return;
-
-    // ADICIONA O LIVRO A LSITA
-    livro->Seguinte = lista_livros->Inicio;
-    lista_livros->Inicio = livro;
-
-    // ADICIONA 1 AO VALOR DA QUANTIDADE DE LIVROS NA LISTA
-    lista_livros->QuantidadeDeLivros = lista_livros->QuantidadeDeLivros + 1;
-}
-
-
-
-
-
-// VERIFICA SE UMA CATEGORIA JÁ EXISTE
-CATEGORIA *ExisteCategoria(LIVRO *livro)
-{
-    if (!hl || !livro) return NULL;
-
-    // PARA FAZER LOOP PELAS CATEGORIAS
-    CATEGORIA *categorias = hl->Inicio;
-
-    // FAZ LOOP PELAS CATEGORIAS
-    while(categorias)
-    {
-        // VERIFICA SE A CATEGORIAS EXISTE
-        if(strcasecmp(categorias->Nome, livro->Area) == 0)
-        {
-            // SE A CATEGORIA EXISTIR, DEVOLVE A CATEGORIA
-            return categorias;
-        }
-
-        // SELECIONA A CATEGORIA SEGUINTE
-        categorias = categorias->Seguinte;
-    }
-
-    return NULL;
-}
-
-
-
-
-
-// ADICIONA UM LIVRO AO 'HASHING_LIVROS'
-// E CRIA UMA NOVA CATEGORIA CASO AINDA NÃO EXISTA
-void AdicionarLivro(LIVRO *livro)
-{
-    if (!hl || !livro) return;
-
-    // METE NA VARIAVEL A CATEGORIA EXISTENTE
-    CATEGORIA *categoria = ExisteCategoria(livro);
-
-    // CASO NAO EXISTA ESSA CATEGORIA, CRIA UMA NOVA
-    if (!categoria)
-    {
-        // CRIA UMA NOVA CATEGORIA
-        categoria = Criar_Categoria();
-
-        // CRIA A LISTA DE LIVROS VAZIA PARA ESSA CATEGORIA
-        categoria->ListaDeLivros = Criar_ListaLivros();
-
-        // DA O NOME A CATEGORIA
-        strcpy(categoria->Nome, livro->Area);
-
-        // ADICIONA O LIVRO NA NOVA CATEGORIA
-        AdicionarLivroNaLista(categoria->ListaDeLivros, livro);
-
-        // CASO NAO HAJA NENHUMA AREA
-        if (!hl->Inicio)
-        {
-            // METE A NOVA CATEGORIA NO INICIO DA LISTA DAS CATEGORIAS
-            hl->Inicio = categoria;
-        }
-    }
-    // CASO EXISTA A CATEGORIA
-    else
-    {
-        // METE LA O LIVRINHO
-        AdicionarLivroNaLista(categoria->ListaDeLivros, livro);
-    }
-    return;
-}
 
 
 
@@ -330,6 +135,8 @@ void MostrarAreaComMaisLivros()
 // E IMPRIMIR OS SEUS DADOS
 void PesquisarLivroPorISBN()
 {
+    if (hl->Quantidade == 0) return;
+
     ImprimirMenu("Pesquisar Livro por ISBN");
 
     // LE O ISBN DO UTILIZADOR
@@ -375,6 +182,8 @@ void PesquisarLivroPorISBN()
 
 void EncontrarLivroMaisRecente()
 {
+    if (hl->Quantidade == 0) return;
+
     ImprimirMenu("Encontrar Livro mais recente");
 
     CATEGORIA *categorias = hl->Inicio;
@@ -405,6 +214,81 @@ void EncontrarLivroMaisRecente()
 
     PAUSE_CLS;
 }
+
+
+
+
+
+void EncontrarLivroMaisRequisitado()
+{
+    if (hl->Quantidade == 0) return;
+
+    ImprimirMenu("Encontrar Livro mais Requisitado");
+
+    CATEGORIA *categorias = hl->Inicio;
+
+    LIVRO *livro_mais_requisitado = NULL;
+    int requisicoes = 0;
+
+    while (categorias)
+    {
+        LIVRO *livro = categorias->ListaDeLivros->Inicio;
+
+        while (livro)
+        {
+            if (livro->NumeroDeRequisicoes > requisicoes)
+            {
+                livro_mais_requisitado = livro;
+                requisicoes = livro->NumeroDeRequisicoes;
+            }
+
+            livro = livro->Seguinte;
+        }
+
+        categorias = categorias->Seguinte;
+    }
+
+    printf("\n\Livro mais requisitado encontrado:\n\n");
+    MostrarLivro(livro_mais_requisitado);
+
+    PAUSE_CLS;
+}
+
+
+
+
+
+void EncontrarCategoriasComMaisRequisicoes()
+{
+    if (!hl || !hl->Inicio) return;
+
+    ImprimirMenu("Encontrar area com mais Requisições");
+
+    CATEGORIA *categorias = hl->Inicio;
+
+    CATEGORIA *categoria_mais_requisitada = NULL;
+    int requisicoes = 0;
+
+    while (categorias)
+    {
+        if (categorias->NumeroDeRequisicoes > requisicoes)
+        {
+            categoria_mais_requisitada = categorias;
+            requisicoes = categorias->NumeroDeRequisicoes;
+
+            break;
+        }
+
+        categorias = categorias->Seguinte;
+    }
+
+    printf("\n\nCategoria mais requisitada encontrada:\n\n");
+    printf("Nome: %s", categoria_mais_requisitada->Nome);
+    printf("\nNúmero de Requisições: %d", categoria_mais_requisitada->NumeroDeRequisicoes);
+
+    PAUSE_CLS;
+}
+
 
 
 
@@ -451,6 +335,15 @@ LIVRO *Wizard_Livro()
     PAUSE_CLS;
     return Criar_Livro_Preenchido(isbn, titulo, autor, area, anoDePublicacao, 0);
 }
+
+
+
+
+
+
+
+
+
 
 
 

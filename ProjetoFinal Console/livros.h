@@ -1,3 +1,6 @@
+#ifndef _LIVROS_H_
+#define _LIVROS_H_
+
 // HASING_LIVROS    -> NO_HASING_LIVRO  -> LISTA_LIVROS -> LIVRO
 // LISTA_CATEGORIAS -> INDEX_CATEGORIAS -> LISTA_LIVROS -> LIVRO
 
@@ -45,3 +48,5 @@ struct LISTA_CATEGORIAS
     CATEGORIA *Inicio;
     int Quantidade;
 };
+
+#endif

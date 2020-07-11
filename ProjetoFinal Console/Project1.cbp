@@ -12,10 +12,14 @@
 				<Option compiler="gcc" />
 			</Target>
 		</Build>
+		<Unit filename="livros.cpp" />
 		<Unit filename="livros.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="main.cpp" />
+		<Unit filename="requisitantes.cpp">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="requisitantes.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>

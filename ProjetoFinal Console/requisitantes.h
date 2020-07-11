@@ -1,3 +1,6 @@
+#ifndef _REQUISITANTES_H_
+#define _REQUISITANTES_H_
+
 struct REQUISITANTE
 {
     char ID[9];
@@ -32,3 +35,5 @@ struct DATA
     int Mes;
     int Ano;
 };
+
+#endif
