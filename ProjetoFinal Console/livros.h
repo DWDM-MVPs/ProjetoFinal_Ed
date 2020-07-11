@@ -1,5 +1,5 @@
-// HASING_LIVROS -> NO_HASING_LIVRO -> LISTA_LIVROS -> NO_LIVRO -> LIVRO
-// LISTA_CATEGORIAS -> INDEX_CATEGORIAS -> LISTA_LIVROS -> INDEX_LIVROS -> LIVRO
+// HASING_LIVROS    -> NO_HASING_LIVRO  -> LISTA_LIVROS -> LIVRO
+// LISTA_CATEGORIAS -> INDEX_CATEGORIAS -> LISTA_LIVROS -> LIVRO
 
 
 
@@ -14,15 +14,7 @@ struct LIVRO
     char Area[100];
     int AnoDePublicacao;
     int NumeroDeRequisicoes;
-};
-
-
-
-// ELEMENTOS DA LISTA DE LIVROS
-struct NO_LIVRO
-{
-    LIVRO *Livro;
-    NO_LIVRO *Seguinte;
+    LIVRO *Seguinte;
 };
 
 
@@ -30,26 +22,26 @@ struct NO_LIVRO
 // LISTA DE LIVROS
 struct LISTA_LIVROS
 {
-    NO_LIVRO *Inicio;
+    LIVRO *Inicio;
     int QuantidadeDeLivros;
 };
 
 
 
 // AREA / CATEGORIA
-struct NO_HASHING_LIVRO
+struct CATEGORIA
 {
     char Nome[100];
     int NumeroDeRequisicoes;
     LISTA_LIVROS *ListaDeLivros;
-    NO_HASHING_LIVRO *Seguinte;
+    CATEGORIA *Seguinte;
 };
 
 
 
 // LISTA DAS AREAS / CATEGORIAS
-struct HASHING_LIVROS
+struct LISTA_CATEGORIAS
 {
-    NO_HASHING_LIVRO *Inicio;
+    CATEGORIA *Inicio;
     int Quantidade;
 };

@@ -18,7 +18,7 @@
 
 
 
-static HASHING_LIVROS *hl;
+static LISTA_CATEGORIAS *hl;
 
 
 
@@ -35,16 +35,6 @@ LIVRO *Criar_Livro()
     return livro;
 }
 
-NO_LIVRO *Criar_NoLivro()
-{
-    NO_LIVRO *no_livro = (NO_LIVRO *)malloc(sizeof(NO_LIVRO));
-
-    no_livro->Livro = NULL;
-    no_livro->Seguinte = NULL;
-
-    return no_livro;
-}
-
 LISTA_LIVROS *Criar_ListaLivros()
 {
     LISTA_LIVROS *lista_livros = (LISTA_LIVROS *)malloc(sizeof(LISTA_LIVROS));
@@ -55,24 +45,25 @@ LISTA_LIVROS *Criar_ListaLivros()
     return lista_livros;
 }
 
-    NO_HASHING_LIVRO *Criar_NoHashingLivro()
+CATEGORIA *Criar_Categoria()
 {
-    NO_HASHING_LIVRO *no_hashing_livro = (NO_HASHING_LIVRO *)malloc(sizeof(NO_HASHING_LIVRO));
+    CATEGORIA *categoria = (CATEGORIA *)malloc(sizeof(CATEGORIA));
 
-    no_hashing_livro->Seguinte = NULL;
-    no_hashing_livro->NumeroDeRequisicoes = 0;
+    categoria->Seguinte = NULL;
+    categoria->ListaDeLivros = NULL;
+    categoria->NumeroDeRequisicoes = 0;
 
-    return no_hashing_livro;
+    return categoria;
 }
 
-HASHING_LIVROS *Criar_HashingLivro()
+LISTA_CATEGORIAS *Criar_ListaCategorias()
 {
-    HASHING_LIVROS *hashing_livros = (HASHING_LIVROS *)malloc(sizeof(HASHING_LIVROS));
+    LISTA_CATEGORIAS *lista_categorias = (LISTA_CATEGORIAS *)malloc(sizeof(LISTA_CATEGORIAS));
 
-    hashing_livros->Inicio = NULL;
-    hashing_livros->Quantidade = 0;
+    lista_categorias->Inicio = NULL;
+    lista_categorias->Quantidade = 0;
 
-    return hashing_livros;
+    return lista_categorias;
 }
 
 
@@ -158,24 +149,16 @@ LIVRO *Criar_Livro_Preenchido(int isbn, char *titulo, char *autor, char *area, i
 
 
 
-// ADICIONA UM LIVRO À LISTA
+// ADICIONA UM LIVRO A LISTA
 void AdicionarLivroNaLista(LISTA_LIVROS *lista_livros, LIVRO *livro)
 {
     if (!lista_livros || !livro) return;
 
-    // CRIAR UM COISO COM O LIVRO
-    NO_LIVRO *no_livro = Criar_NoLivro();
-    no_livro->Livro = livro;
+    // ADICIONA O LIVRO A LSITA
+    livro->Seguinte = lista_livros->Inicio;
+    lista_livros->Inicio = livro;
 
-    // SE A LISTA JA TIVER LIVROS
-    if (lista_livros->Inicio)
-    {
-        // FAZ O LIVRO ATUAL APONTAR PARA O LIVRO QUE SUPOSTAMENTE ESTAVA EM PRIMEIRO NA LISTA
-        no_livro->Seguinte = lista_livros->Inicio;
-    }
-    // METE O LIVRO CRIADO AQUI NO INICIO DA LISTA
-    lista_livros->Inicio = no_livro;
-
+    // ADICIONA 1 AO VALOR DA QUANTIDADE DE LIVROS NA LISTA
     lista_livros->QuantidadeDeLivros = lista_livros->QuantidadeDeLivros + 1;
 }
 
@@ -184,25 +167,25 @@ void AdicionarLivroNaLista(LISTA_LIVROS *lista_livros, LIVRO *livro)
 
 
 // VERIFICA SE UMA CATEGORIA JÁ EXISTE
-NO_HASHING_LIVRO *ExisteCategoria(LIVRO *livro)
+CATEGORIA *ExisteCategoria(LIVRO *livro)
 {
     if (!hl || !livro) return NULL;
 
     // PARA FAZER LOOP PELAS CATEGORIAS
-    NO_HASHING_LIVRO *no_hashing_livro = hl->Inicio;
+    CATEGORIA *categorias = hl->Inicio;
 
     // FAZ LOOP PELAS CATEGORIAS
-    while(no_hashing_livro)
+    while(categorias)
     {
         // VERIFICA SE A CATEGORIAS EXISTE
-        if(strcasecmp(no_hashing_livro->Nome, livro->Area) == 0)
+        if(strcasecmp(categorias->Nome, livro->Area) == 0)
         {
             // SE A CATEGORIA EXISTIR, DEVOLVE A CATEGORIA
-            return no_hashing_livro;
+            return categorias;
         }
 
         // SELECIONA A CATEGORIA SEGUINTE
-        no_hashing_livro = no_hashing_livro->Seguinte;
+        categorias = categorias->Seguinte;
     }
 
     return NULL;
@@ -219,35 +202,35 @@ void AdicionarLivro(LIVRO *livro)
     if (!hl || !livro) return;
 
     // METE NA VARIAVEL A CATEGORIA EXISTENTE
-    NO_HASHING_LIVRO *no_hashing_livro = ExisteCategoria(livro);
+    CATEGORIA *categoria = ExisteCategoria(livro);
 
     // CASO NAO EXISTA ESSA CATEGORIA, CRIA UMA NOVA
-    if (!no_hashing_livro)
+    if (!categoria)
     {
         // CRIA UMA NOVA CATEGORIA
-        no_hashing_livro = Criar_NoHashingLivro();
+        categoria = Criar_Categoria();
 
         // CRIA A LISTA DE LIVROS VAZIA PARA ESSA CATEGORIA
-        no_hashing_livro->ListaDeLivros = Criar_ListaLivros();
+        categoria->ListaDeLivros = Criar_ListaLivros();
 
         // DA O NOME A CATEGORIA
-        strcpy(no_hashing_livro->Nome, livro->Area);
+        strcpy(categoria->Nome, livro->Area);
 
         // ADICIONA O LIVRO NA NOVA CATEGORIA
-        AdicionarLivroNaLista(no_hashing_livro->ListaDeLivros, livro);
+        AdicionarLivroNaLista(categoria->ListaDeLivros, livro);
 
         // CASO NAO HAJA NENHUMA AREA
         if (!hl->Inicio)
         {
             // METE A NOVA CATEGORIA NO INICIO DA LISTA DAS CATEGORIAS
-            hl->Inicio = no_hashing_livro;
+            hl->Inicio = categoria;
         }
     }
     // CASO EXISTA A CATEGORIA
     else
     {
         // METE LA O LIVRINHO
-        AdicionarLivroNaLista(no_hashing_livro->ListaDeLivros, livro);
+        AdicionarLivroNaLista(categoria->ListaDeLivros, livro);
     }
     return;
 }
@@ -277,28 +260,28 @@ void MostrarLivrosPorArea()
     ImprimirMenu("Mostrar Livros por Area");
 
     // PARA FAZER LOOP PELAS CATEGORIAS
-    NO_HASHING_LIVRO *no_hashing_livro = hl->Inicio;
+    CATEGORIA *categoria = hl->Inicio;
 
     // FAZ LOOP PELAS CATEGORIAS
-    while (no_hashing_livro)
+    while (categoria)
     {
         // PARA FAZER LOOP PELOS LIVROS
-        NO_LIVRO *no_livro = no_hashing_livro->ListaDeLivros->Inicio;
+        LIVRO *livro = categoria->ListaDeLivros->Inicio;
 
-        printf("\n# ========= < Area: %s >\n\n", no_hashing_livro->Nome);
+        printf("\n# ========= < Area: %s >\n\n", categoria->Nome);
 
         // FAZ LOOP PELOS LIVROS
-        while (no_livro)
+        while (livro)
         {
             // FAZ PRINTF DE TODAS AS INFORMACOES DO LIVRO
-            MostrarLivro(no_livro->Livro);
+            MostrarLivro(livro);
 
             // SELECIONA O LIVRO SEGUINTE NO LOOP
-            no_livro = no_livro->Seguinte;
+            livro = livro->Seguinte;
         }
 
         // SELECIONA A CATEGORIA SEGUINTE NO LOOP
-        no_hashing_livro = no_hashing_livro->Seguinte;
+        categoria = categoria->Seguinte;
     }
 
     PAUSE_CLS;
@@ -314,10 +297,10 @@ void MostrarAreaComMaisLivros()
     ImprimirMenu("Mostrar Area com mais Livros");
 
     // PARA FAZER O LOOP PELAS CATEGORIAS
-    NO_HASHING_LIVRO *categoria = hl->Inicio;
+    CATEGORIA *categoria = hl->Inicio;
 
     // PARA GUARDAR A CATEGORIA COM MAIS LIVROS
-    NO_HASHING_LIVRO *maior_categoria = NULL;
+    CATEGORIA *maior_categoria = NULL;
     int maxLivros = 0;
 
     // FAZ LOOP PELAS CATEGORIAS
@@ -345,35 +328,81 @@ void MostrarAreaComMaisLivros()
 
 // VERIFICAR SE UM LIVRO EXISTE
 // E IMPRIMIR OS SEUS DADOS
-void *PesquisarLivroPorISBN()
+void PesquisarLivroPorISBN()
 {
     ImprimirMenu("Pesquisar Livro por ISBN");
-    int isbn = 0;
 
+    // LE O ISBN DO UTILIZADOR
+    int isbn = 0;
     printf("Insira o ISBN do livro a pesquisar: ");
     scanf("%d", &isbn);
 
-    NO_HASHING_LIVRO *categorias = hl->Inicio;
+    // GUARDA AS CATEGORIAS PARA FAZER LOOP POR ELAS
+    CATEGORIA *categorias = hl->Inicio;
 
+    // FAZ LOOP POR TODAS AS CATEGORIAS
     while (categorias)
     {
-        LISTA_LIVROS *lista_livros = categorias->ListaDeLivros;
+        LIVRO *livro = categorias->ListaDeLivros->Inicio;
 
-        while (lista_livros)
+        // FAZ LOOP POR TODOS OS LIVROS
+        while (livro)
         {
-            NO_LIVRO *no_livro = lista_livros->Inicio;
-
-            if (no_livro->Livro->ISBN == isbn)
+            // VERIFICA SE O ISBN DO LIVRO ATUAL NO LOOP CORRESPONDE AO INTRODUZIDO PELO UTILIZADOR
+            if (livro->ISBN == isbn)
             {
+                // IMPRIME AS INFORMAÇOES DO LIVRO
                 printf("\nLivro encontrado!\n\n\n\nInformações do livro encontrado:\n\n");
-                MostrarLivro(no_livro->Livro);
-
-                return NULL;
+                MostrarLivro(livro);
+                return;
             }
+
+            // VAI PARA O LIVRO SEGUINTE
+            livro = livro->Seguinte;
         }
+
+        // VAI PARA A CATEGORIA SEGUINTE
+        categorias = categorias->Seguinte;
     }
 
     printf("Não foi encontrado nenhum livro com o ISBN %d", isbn);
+    PAUSE_CLS;
+}
+
+
+
+
+
+void EncontrarLivroMaisRecente()
+{
+    ImprimirMenu("Encontrar Livro mais recente");
+
+    CATEGORIA *categorias = hl->Inicio;
+
+    LIVRO *livro_mais_recente = NULL;
+    int maxAno = 0;
+
+    while (categorias)
+    {
+        LIVRO *livro = categorias->ListaDeLivros->Inicio;
+
+        while (livro)
+        {
+            if (livro->AnoDePublicacao > maxAno)
+            {
+                livro_mais_recente = livro;
+                maxAno = livro_mais_recente->AnoDePublicacao;
+            }
+
+            livro = livro->Seguinte;
+        }
+
+        categorias = categorias->Seguinte;
+    }
+
+    printf("\n\nLivro mais recente encontrado:\n\n");
+    MostrarLivro(livro_mais_recente);
+
     PAUSE_CLS;
 }
 
@@ -431,7 +460,7 @@ int main()
 {
     setlocale(LC_ALL, "");
 
-    hl = Criar_HashingLivro();
+    hl = Criar_ListaCategorias();
 
     LIVRO *l = Wizard_Livro();
     CLS;
@@ -444,6 +473,8 @@ int main()
     MostrarAreaComMaisLivros();
 
     PesquisarLivroPorISBN();
+
+    EncontrarLivroMaisRecente();
 
 	return 0;
 }
