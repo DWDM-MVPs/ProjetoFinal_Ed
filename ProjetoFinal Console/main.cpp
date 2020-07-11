@@ -8,6 +8,21 @@
 #include "livros.h"
 #include "requisitantes.h"
 
+#define PAUSE printf("\n\n\n\n\n"); system("PAUSE");
+#define CLS system("CLS");
+#define PAUSE_CLS PAUSE CLS;
+
+#define MSG_SUCESSO "Pedido efetuado com sucesso!";
+
+
+
+
+
+static HASHING_LIVROS *hl;
+
+
+
+
 
 LIVRO *Criar_Livro()
 {
@@ -65,6 +80,15 @@ HASHING_LIVROS *Criar_HashingLivro()
 
 
 
+
+
+
+
+
+void ImprimirMenu(char titulo[100])
+{
+    printf("# ===================== # > %s < # ===================== #\n\n", titulo);
+}
 
 
 
@@ -160,12 +184,12 @@ void AdicionarLivroNaLista(LISTA_LIVROS *lista_livros, LIVRO *livro)
 
 
 // VERIFICA SE UMA CATEGORIA JÁ EXISTE
-NO_HASHING_LIVRO *ExisteCategoria(HASHING_LIVROS *hashing_livros, LIVRO *livro)
+NO_HASHING_LIVRO *ExisteCategoria(LIVRO *livro)
 {
-    if (!hashing_livros || !livro) return NULL;
+    if (!hl || !livro) return NULL;
 
     // PARA FAZER LOOP PELAS CATEGORIAS
-    NO_HASHING_LIVRO *no_hashing_livro = hashing_livros->Inicio;
+    NO_HASHING_LIVRO *no_hashing_livro = hl->Inicio;
 
     // FAZ LOOP PELAS CATEGORIAS
     while(no_hashing_livro)
@@ -190,12 +214,12 @@ NO_HASHING_LIVRO *ExisteCategoria(HASHING_LIVROS *hashing_livros, LIVRO *livro)
 
 // ADICIONA UM LIVRO AO 'HASHING_LIVROS'
 // E CRIA UMA NOVA CATEGORIA CASO AINDA NÃO EXISTA
-void AdicionarLivro(HASHING_LIVROS *hashing_livros, LIVRO *livro)
+void AdicionarLivro(LIVRO *livro)
 {
-    if (!hashing_livros || !livro) return;
+    if (!hl || !livro) return;
 
     // METE NA VARIAVEL A CATEGORIA EXISTENTE
-    NO_HASHING_LIVRO *no_hashing_livro = ExisteCategoria(hashing_livros, livro);
+    NO_HASHING_LIVRO *no_hashing_livro = ExisteCategoria(livro);
 
     // CASO NAO EXISTA ESSA CATEGORIA, CRIA UMA NOVA
     if (!no_hashing_livro)
@@ -213,10 +237,10 @@ void AdicionarLivro(HASHING_LIVROS *hashing_livros, LIVRO *livro)
         AdicionarLivroNaLista(no_hashing_livro->ListaDeLivros, livro);
 
         // CASO NAO HAJA NENHUMA AREA
-        if (!hashing_livros->Inicio)
+        if (!hl->Inicio)
         {
             // METE A NOVA CATEGORIA NO INICIO DA LISTA DAS CATEGORIAS
-            hashing_livros->Inicio = no_hashing_livro;
+            hl->Inicio = no_hashing_livro;
         }
     }
     // CASO EXISTA A CATEGORIA
@@ -235,7 +259,7 @@ void AdicionarLivro(HASHING_LIVROS *hashing_livros, LIVRO *livro)
 // FAZ O PRINTF DE TODAS AS INFORMACOES DO LIVRO
 void MostrarLivro(LIVRO *livro)
 {
-    printf("\nISBN: %d", livro->ISBN);
+    printf("ISBN: %d", livro->ISBN);
     printf("\nTitulo: %s", livro->Titulo);
     printf("\nAutor: %s", livro->Autor);
     printf("\nCategoria: %s", livro->Area);
@@ -248,12 +272,12 @@ void MostrarLivro(LIVRO *livro)
 
 
 // USA O MOSTRARLIVRO() PARA LISTAR TODOS OS LIVROS QUE EXISTEM
-void MostrarLivrosPorArea(HASHING_LIVROS *hashing_livros)
+void MostrarLivrosPorArea()
 {
-    printf("\n\n========== MOSTRAR LIVROS POR AREA ==========\n");
+    ImprimirMenu("Mostrar Livros por Area");
 
     // PARA FAZER LOOP PELAS CATEGORIAS
-    NO_HASHING_LIVRO *no_hashing_livro = hashing_livros->Inicio;
+    NO_HASHING_LIVRO *no_hashing_livro = hl->Inicio;
 
     // FAZ LOOP PELAS CATEGORIAS
     while (no_hashing_livro)
@@ -261,7 +285,7 @@ void MostrarLivrosPorArea(HASHING_LIVROS *hashing_livros)
         // PARA FAZER LOOP PELOS LIVROS
         NO_LIVRO *no_livro = no_hashing_livro->ListaDeLivros->Inicio;
 
-        printf("\nCategoria: %s\n", no_hashing_livro->Nome);
+        printf("\n# ========= < Area: %s >\n\n", no_hashing_livro->Nome);
 
         // FAZ LOOP PELOS LIVROS
         while (no_livro)
@@ -276,6 +300,8 @@ void MostrarLivrosPorArea(HASHING_LIVROS *hashing_livros)
         // SELECIONA A CATEGORIA SEGUINTE NO LOOP
         no_hashing_livro = no_hashing_livro->Seguinte;
     }
+
+    PAUSE_CLS;
 }
 
 
@@ -283,12 +309,12 @@ void MostrarLivrosPorArea(HASHING_LIVROS *hashing_livros)
 
 
 // MOSTRA A AREA COM MAIS LIVROS
-void MostrarAreaComMaisLivros(HASHING_LIVROS *hashing_livros)
+void MostrarAreaComMaisLivros()
 {
-    printf("\n\n========== MOSTRAR AREA COM MAIS LIVROS ==========\n\n");
+    ImprimirMenu("Mostrar Area com mais Livros");
 
     // PARA FAZER O LOOP PELAS CATEGORIAS
-    NO_HASHING_LIVRO *categoria = hashing_livros->Inicio;
+    NO_HASHING_LIVRO *categoria = hl->Inicio;
 
     // PARA GUARDAR A CATEGORIA COM MAIS LIVROS
     NO_HASHING_LIVRO *maior_categoria = NULL;
@@ -308,7 +334,47 @@ void MostrarAreaComMaisLivros(HASHING_LIVROS *hashing_livros)
         categoria = categoria->Seguinte;
     }
 
-    printf("Categoria com mais livros: %s", maior_categoria->Nome);
+    printf("Area com mais livros: %s", maior_categoria->Nome);
+
+    PAUSE_CLS;
+}
+
+
+
+
+
+// VERIFICAR SE UM LIVRO EXISTE
+// E IMPRIMIR OS SEUS DADOS
+void *PesquisarLivroPorISBN()
+{
+    ImprimirMenu("Pesquisar Livro por ISBN");
+    int isbn = 0;
+
+    printf("Insira o ISBN do livro a pesquisar: ");
+    scanf("%d", &isbn);
+
+    NO_HASHING_LIVRO *categorias = hl->Inicio;
+
+    while (categorias)
+    {
+        LISTA_LIVROS *lista_livros = categorias->ListaDeLivros;
+
+        while (lista_livros)
+        {
+            NO_LIVRO *no_livro = lista_livros->Inicio;
+
+            if (no_livro->Livro->ISBN == isbn)
+            {
+                printf("\nLivro encontrado!\n\n\n\nInformações do livro encontrado:\n\n");
+                MostrarLivro(no_livro->Livro);
+
+                return NULL;
+            }
+        }
+    }
+
+    printf("Não foi encontrado nenhum livro com o ISBN %d", isbn);
+    PAUSE_CLS;
 }
 
 
@@ -319,6 +385,8 @@ void MostrarAreaComMaisLivros(HASHING_LIVROS *hashing_livros)
 // E CRIA UM LIVRO NOVO
 LIVRO *Wizard_Livro()
 {
+    ImprimirMenu("WIZARD: Criar novo Livro");
+
     int isbn;
     char titulo[100];
     char autor[100];
@@ -349,6 +417,9 @@ LIVRO *Wizard_Livro()
     scanf("%d", &anoDePublicacao);
 
 
+
+    printf("\nLivro criado com sucesso!");
+    PAUSE_CLS;
     return Criar_Livro_Preenchido(isbn, titulo, autor, area, anoDePublicacao, 0);
 }
 
@@ -360,14 +431,19 @@ int main()
 {
     setlocale(LC_ALL, "");
 
-    HASHING_LIVROS *hl = Criar_HashingLivro();
+    hl = Criar_HashingLivro();
 
     LIVRO *l = Wizard_Livro();
-    AdicionarLivro(hl, l);
-
+    CLS;
+    ImprimirMenu("Livro criado");
     MostrarLivro(l);
-    MostrarLivrosPorArea(hl);
-    MostrarAreaComMaisLivros(hl);
+    PAUSE_CLS;
+    AdicionarLivro(l);
+
+    MostrarLivrosPorArea();
+    MostrarAreaComMaisLivros();
+
+    PesquisarLivroPorISBN();
 
 	return 0;
 }
