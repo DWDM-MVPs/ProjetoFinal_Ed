@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1594434013 source:c:\milkenm\escola\ipv\github dwdm\projetofinal_ed\projetofinal console\main.cpp
+1594565383 source:c:\milkenm\escola\ipv\github dwdm\projetofinal_ed\projetofinal console\main.cpp
 	<iostream>
 	<stdio.h>
 	<stdlib.h>
@@ -28,9 +28,9 @@
 	<ctype.h>
 	<time.h>
 
-1594435614 c:\milkenm\escola\ipv\github dwdm\projetofinal_ed\projetofinal console\livros.h
+1594497584 c:\milkenm\escola\ipv\github dwdm\projetofinal_ed\projetofinal console\livros.h
 
-1594435860 source:c:\milkenm\escola\ipv\github dwdm\projetofinal_ed\projetofinal console\livros.cpp
+1594567053 source:c:\milkenm\escola\ipv\github dwdm\projetofinal_ed\projetofinal console\livros.cpp
 	<iostream>
 	<stdio.h>
 	<stdlib.h>
@@ -39,7 +39,41 @@
 	<time.h>
 	"livros.h"
 
-1594325220 c:\milkenm\escola\ipv\github dwdm\projetofinal_ed\projetofinal console\requisitantes.h
+1594499568 c:\milkenm\escola\ipv\github dwdm\projetofinal_ed\projetofinal console\requisitantes.h
 
-1594435603 source:c:\milkenm\escola\ipv\github dwdm\projetofinal_ed\projetofinal console\requisitantes.cpp
+1594567056 source:c:\milkenm\escola\ipv\github dwdm\projetofinal_ed\projetofinal console\requisitantes.cpp
+	<iostream>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<conio.h>
+	<time.h>
+	"requisitantes.h"
+
+1594498691 c:\milkenm\escola\ipv\github dwdm\projetofinal_ed\projetofinal console\livros.cpp
+	<iostream>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<conio.h>
+	<time.h>
+	"livros.h"
+
+1594575161 source:c:\milkenm\escola\ipv\github dwdm\projetofinal_ed\projetofinal console\menu_livros.cpp
+	<iostream>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<conio.h>
+	<time.h>
+	"livros.h"
+
+1594566851 source:c:\milkenm\escola\ipv\github dwdm\projetofinal_ed\projetofinal console\menu_requisitantes.cpp
+	<iostream>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<conio.h>
+	<time.h>
+	"requisitantes.h"
 

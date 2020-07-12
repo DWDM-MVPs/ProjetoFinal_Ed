@@ -1,31 +1,7 @@
 #ifndef _REQUISITANTES_H_
 #define _REQUISITANTES_H_
 
-struct REQUISITANTE
-{
-    char ID[9];
-    char Nome[100];
-    int DiaNascimento;
-    int MesNascimento;
-    int AnoNascimento;
-    char ID_Freguesia[6];
-};
 
-
-
-struct NO_REQUISITANTE
-{
-    REQUISITANTE *Requisitante;
-    struct No_Requisitante *Seguinte;
-};
-
-
-
-struct LISTA_REQUISITANTES
-{
-    NO_REQUISITANTE *Start;
-    int Quantidade;
-};
 
 
 
@@ -34,6 +10,48 @@ struct DATA
     int Dia;
     int Mes;
     int Ano;
+};
+
+
+
+
+
+struct REQUISITANTE
+{
+    int ID;
+    char Nome[100];
+    DATA *DataDeNascimento;
+    int NumeroRequisicoes;
+    int ID_Freguesia;
+    REQUISITANTE *Seguinte;
+};
+
+
+
+struct LISTA_REQUISITANTES
+{
+    REQUISITANTE *Inicio;
+    int Quantidade;
+};
+
+
+
+
+
+struct REQUISICAO
+{
+    char IdRequisitante[9];
+    char IsbnLivro;
+    DATA *DataRequisicao;
+    REQUISICAO *Seguinte;
+};
+
+
+
+struct LISTA_REQUISICOES
+{
+    REQUISICAO *Inicio;
+    int QuantidadeRequisicoes;
 };
 
 #endif

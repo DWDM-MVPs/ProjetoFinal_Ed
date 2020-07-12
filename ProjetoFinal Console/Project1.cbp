@@ -17,6 +17,8 @@
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="main.cpp" />
+		<Unit filename="menu_livros.cpp" />
+		<Unit filename="menu_requisitantes.cpp" />
 		<Unit filename="requisitantes.cpp">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -24,6 +26,15 @@
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Extensions>
+			<DoxyBlocks>
+				<comment_style block="4" line="0" />
+				<doxyfile_project />
+				<doxyfile_build />
+				<doxyfile_warnings />
+				<doxyfile_output />
+				<doxyfile_dot />
+				<general />
+			</DoxyBlocks>
 			<lib_finder disable_auto="1" />
 		</Extensions>
 	</Project>

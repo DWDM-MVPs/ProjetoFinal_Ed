@@ -1,8 +1,7 @@
 #ifndef _LIVROS_H_
 #define _LIVROS_H_
 
-// HASING_LIVROS    -> NO_HASING_LIVRO  -> LISTA_LIVROS -> LIVRO
-// LISTA_CATEGORIAS -> INDEX_CATEGORIAS -> LISTA_LIVROS -> LIVRO
+// LISTA_CATEGORIAS -> CATEGORIA -> LIVRO
 
 
 
@@ -22,21 +21,13 @@ struct LIVRO
 
 
 
-// LISTA DE LIVROS
-struct LISTA_LIVROS
-{
-    LIVRO *Inicio;
-    int QuantidadeDeLivros;
-};
-
-
-
 // AREA / CATEGORIA
 struct CATEGORIA
 {
     char Nome[100];
     int NumeroDeRequisicoes;
-    LISTA_LIVROS *ListaDeLivros;
+    int QuantidadeDeLivros;
+    LIVRO *Inicio;
     CATEGORIA *Seguinte;
 };
 
@@ -46,7 +37,8 @@ struct CATEGORIA
 struct LISTA_CATEGORIAS
 {
     CATEGORIA *Inicio;
-    int Quantidade;
+    int QuantidadeDeLivros;
+    int NumeroDeRequisicoes;
 };
 
 #endif

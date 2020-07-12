@@ -10,6 +10,10 @@
 
 #include "livros.h"
 
+#define PAUSE printf("\n\n\n\n\n"); system("PAUSE");
+#define CLS system("CLS");
+#define PAUSE_CLS PAUSE CLS;
+
 LIVRO *Criar_Livro()
 {
     LIVRO *livro = (LIVRO *)malloc(sizeof(LIVRO));
@@ -21,22 +25,13 @@ LIVRO *Criar_Livro()
     return livro;
 }
 
-LISTA_LIVROS *Criar_ListaLivros()
-{
-    LISTA_LIVROS *lista_livros = (LISTA_LIVROS *)malloc(sizeof(LISTA_LIVROS));
-
-    lista_livros->Inicio = NULL;
-    lista_livros->QuantidadeDeLivros = 0;
-
-    return lista_livros;
-}
-
 CATEGORIA *Criar_Categoria()
 {
     CATEGORIA *categoria = (CATEGORIA *)malloc(sizeof(CATEGORIA));
 
     categoria->Seguinte = NULL;
-    categoria->ListaDeLivros = NULL;
+    categoria->Inicio = NULL;
+    categoria->QuantidadeDeLivros = 0;
     categoria->NumeroDeRequisicoes = 0;
 
     return categoria;
@@ -47,7 +42,8 @@ LISTA_CATEGORIAS *Criar_ListaCategorias()
     LISTA_CATEGORIAS *lista_categorias = (LISTA_CATEGORIAS *)malloc(sizeof(LISTA_CATEGORIAS));
 
     lista_categorias->Inicio = NULL;
-    lista_categorias->Quantidade = 0;
+    lista_categorias->NumeroDeRequisicoes = 0;
+    lista_categorias->QuantidadeDeLivros = 0;
 
     return lista_categorias;
 }
@@ -57,6 +53,7 @@ LISTA_CATEGORIAS *Criar_ListaCategorias()
 
 
 
+// CRIA UM LIVRO COM AS INFROMAÇOES ESSENCIAIS
 LIVRO *Criar_Livro_Preenchido(int isbn, char *titulo, char *autor, char *area, int anoDePublicacao, int numeroDeRequisicoes)
 {
     LIVRO *livro = Criar_Livro();
@@ -74,20 +71,40 @@ LIVRO *Criar_Livro_Preenchido(int isbn, char *titulo, char *autor, char *area, i
 
 
 
-
-// ADICIONA UM LIVRO A LISTA
-void AdicionarLivroNaLista(LISTA_CATEGORIAS *hl, LISTA_LIVROS *lista_livros, LIVRO *livro)
+// VERIFICA SE UM LIVRO COM O ISBN INTRODUZIDO EXISTE OU NAO
+bool ExisteISBN(LISTA_CATEGORIAS *hl, int isbn)
 {
-    if (!lista_livros || !livro) return;
+    // VERIFICA SE EXISTEM LIVROS
+    // E SE NAO EXISTIREM LIVROS DEVOLVE FALSE
+    if (hl->QuantidadeDeLivros == 0) return false;
 
-    // ADICIONA O LIVRO A LSITA
-    livro->Seguinte = lista_livros->Inicio;
-    lista_livros->Inicio = livro;
+    // SELECIONA A PRIMEIRA CATEGORIA
+    CATEGORIA *categoria = hl->Inicio;
 
-    // ADICIONA 1 AO VALOR DA QUANTIDADE DE LIVROS NA LISTA
-    lista_livros->QuantidadeDeLivros = lista_livros->QuantidadeDeLivros + 1;
+    // FAZ LOOP POR TODAS AS CATEGORIAS
+    while (categoria)
+    {
+        // SELECIONA O PRIMEIRO LIVRO DA CATEGORIA
+        LIVRO *livro = categoria->Inicio;
 
-    hl->Quantidade = hl->Quantidade + 1;
+        // FAZ LOOP PELOS LIVRO NA LISTA
+        while (livro)
+        {
+            if (livro->ISBN == isbn)
+            {
+                return true;
+            }
+
+            // SELECIONA O LIVRO SEGUINTE
+            livro = livro->Seguinte;
+        }
+
+        // SELECIONA A CATEGORIA SEGUINTE
+        categoria = categoria->Seguinte;
+    }
+
+    // RETURN FALSE PORQUE NAO HA NENHUM LIVRO COM O ISBN PROCURADO
+    return false;
 }
 
 
@@ -123,44 +140,78 @@ CATEGORIA *ExisteCategoria(LISTA_CATEGORIAS *hl, LIVRO *livro)
 
 
 
-// ADICIONA UM LIVRO AO 'HASHING_LIVROS'
-// E CRIA UMA NOVA CATEGORIA CASO AINDA NÃO EXISTA
-void AdicionarLivro(LISTA_CATEGORIAS *hl, LIVRO *livro)
+// GUARDA UM LIVRO NA LISTA DE LIVROS
+void GuardarLivro(LISTA_CATEGORIAS *hl, LIVRO *livro)
 {
     if (!hl || !livro) return;
 
-    // METE NA VARIAVEL A CATEGORIA EXISTENTE
+    // VERIFICA SE A CATEGORIA JA EXISTE
     CATEGORIA *categoria = ExisteCategoria(hl, livro);
 
-    // CASO NAO EXISTA ESSA CATEGORIA, CRIA UMA NOVA
+    // CASO A CATEGORIA AINDA NAO EXISTA
     if (!categoria)
     {
-        // CRIA UMA NOVA CATEGORIA
+        // CRIA A CATEGORIA
         categoria = Criar_Categoria();
 
-        // CRIA A LISTA DE LIVROS VAZIA PARA ESSA CATEGORIA
-        categoria->ListaDeLivros = Criar_ListaLivros();
-
-        // DA O NOME A CATEGORIA
+        // DA O NOME DA CATEGORIA DO LIVRO A CATEGORIA CRIADA EM CIMA
         strcpy(categoria->Nome, livro->Area);
 
-        // ADICIONA O LIVRO NA NOVA CATEGORIA
-        AdicionarLivroNaLista(hl, categoria->ListaDeLivros, livro);
+        // ADICIONA A CATEGORIA A LISTA DE CATEGORIAS
+        categoria->Seguinte = hl->Inicio;
+        hl->Inicio = categoria;
+    }
 
-        // CASO NAO HAJA NENHUMA AREA
-        if (!hl->Inicio)
-        {
-            // METE A NOVA CATEGORIA NO INICIO DA LISTA DAS CATEGORIAS
-            hl->Inicio = categoria;
-        }
-    }
-    // CASO EXISTA A CATEGORIA
-    else
-    {
-        // METE LA O LIVRINHO
-        AdicionarLivroNaLista(hl, categoria->ListaDeLivros, livro);
-    }
-    return;
+    // METE O LIVRO NA CATEGORIA
+    livro->Seguinte = categoria->Inicio;
+    categoria->Inicio = livro;
+
+    // ADICIONA 1 A QUANTIDADE DE LIVROS EXISTENTE
+    categoria->QuantidadeDeLivros = categoria->QuantidadeDeLivros + 1;
+    hl->QuantidadeDeLivros = hl->QuantidadeDeLivros + 1;
+}
+
+
+
+
+// PEDE INPUT AO UTILIZADOR
+// E CRIA UM LIVRO NOVO
+LIVRO *Wizard_Livro(LISTA_CATEGORIAS *hl)
+{
+    int isbn;
+    char titulo[100];
+    char autor[100];
+    char area[100];
+    int anoDePublicacao;
+
+    char temp;
+
+    printf("Insira o ISBN do Livro: ");
+    scanf("%d", &isbn);
+
+    printf("Insira o Título do Livro: ");
+    scanf("%c",&temp);
+    scanf("%[^\n]", titulo);
+
+
+    printf("Insira o Autor do Livro: ");
+    scanf("%c",&temp);
+    scanf("%[^\n]", autor);
+
+
+    printf("Insira a Area do Livro: ");
+    scanf("%c",&temp);
+    scanf("%[^\n]", area);
+
+
+    printf("Insira o Ano de Publicação do Livro: ");
+    scanf("%d", &anoDePublicacao);
+
+
+    LIVRO *livro = Criar_Livro_Preenchido(isbn, titulo, autor, area, anoDePublicacao, 0);
+    GuardarLivro(hl, livro);
+
+    return livro;
 }
 
 
