@@ -58,6 +58,7 @@ void MostrarLivro(LIVRO *livro)
     printf("\nCategoria: %s", livro->Area);
     printf("\nAno de Publicação: %d", livro->AnoDePublicacao);
     printf("\nNúmero de Requisições: %d", livro->NumeroDeRequisicoes);
+    printf("\nFornecedor: %s", livro->Fornecedor);
 }
 
 

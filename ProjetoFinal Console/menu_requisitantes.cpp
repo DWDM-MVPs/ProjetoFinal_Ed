@@ -417,6 +417,14 @@ void MostrarRequisicoesDeRequisitante(LISTA_REQUISITANTES *hr)
 
 
 
+// DETERMINA QUAL A PARTE DO NOME ENTRE OS REQUISITANTES QUE OCORRE MAIS VEZES
+void DeterminarParteDoNomeComMaisOcorrencias(LISTA_REQUISITANTES *hr)
+{
+
+}
+
+
+
 
 void MenuRequisitantes(LISTA_REQUISITANTES *hr)
 {
@@ -435,6 +443,7 @@ void MenuRequisitantes(LISTA_REQUISITANTES *hr)
         printf("\n8. Mostrar Requisitantes com nenhuma Requisição");
         printf("\n9. Mostrar Requisitantes com Requisições ativas");
         printf("\n10. Ver Requisições de um Requisitante");
+        printf("\n11. Determinar parte do Nome com mais ocorrencias");
         printf("\n\n0. Voltar");
         printf("\n\n\n\n\n »---> Escolha: ");
 
@@ -454,6 +463,7 @@ void MenuRequisitantes(LISTA_REQUISITANTES *hr)
             case 8: MostrarSemRequisicoes(hr); break;
             case 9: MostrarRequisicoesAtivas(hr); break;
             case 10: MostrarRequisicoesDeRequisitante(hr); break;
+            case 11: DeterminarParteDoNomeComMaisOcorrencias(hr); break;
         }
     } while (escolha != 0);
 }

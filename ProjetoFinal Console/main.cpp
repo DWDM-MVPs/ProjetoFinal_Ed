@@ -54,8 +54,8 @@ void ImprimirDuplo(const char *funcao, const char *menu)
 
 
 
-
-
+extern void LerLivros(LISTA_CATEGORIAS *hl);
+// MAIN
 int main()
 {
     setlocale(LC_ALL, "");
@@ -63,6 +63,8 @@ int main()
     LISTA_CATEGORIAS *hl = Criar_ListaCategorias();
     LISTA_REQUISITANTES *hr = Criar_ListaRequisitantes();
     LISTA_LOCALIDADES *hz = Criar_ListaLocalidades();
+
+    LerLivros(hl);
 
     int escolha = 0;
     do

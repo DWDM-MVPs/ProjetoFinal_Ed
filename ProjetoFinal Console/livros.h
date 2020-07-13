@@ -18,6 +18,7 @@ struct LIVRO
     int NumeroDeRequisicoes;
     LIVRO *Seguinte;
     bool Disponivel;
+    char Fornecedor[100];
 };
 
 

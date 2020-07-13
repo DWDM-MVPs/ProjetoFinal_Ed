@@ -54,7 +54,7 @@ LISTA_CATEGORIAS *Criar_ListaCategorias()
 
 
 // CRIA UM LIVRO COM AS INFROMAÇOES ESSENCIAIS
-LIVRO *Criar_Livro_Preenchido(int isbn, char *titulo, char *autor, char *area, int anoDePublicacao, int numeroDeRequisicoes)
+LIVRO *Criar_Livro_Preenchido(int isbn, char *titulo, char *autor, char *area, int anoDePublicacao, int numeroDeRequisicoes, char *fornecedor)
 {
     LIVRO *livro = Criar_Livro();
 
@@ -64,6 +64,7 @@ LIVRO *Criar_Livro_Preenchido(int isbn, char *titulo, char *autor, char *area, i
     strcpy(livro->Area, area);
     livro->AnoDePublicacao = anoDePublicacao;
     livro->NumeroDeRequisicoes = numeroDeRequisicoes;
+    strcpy(livro->Fornecedor, fornecedor);
 
     return livro;
 }
@@ -174,6 +175,25 @@ void GuardarLivro(LISTA_CATEGORIAS *hl, LIVRO *livro)
 
 
 
+
+bool ValidarLivro(LIVRO *livro)
+{
+    if (livro->AnoDePublicacao < 0) return false;
+    if (livro->Area == NULL) return false;
+    if (livro->Autor == NULL) return false;
+    if (livro->Disponivel == NULL) return false;
+    if (livro->Fornecedor == NULL) return false;
+    if (livro->ISBN < 0) return false;
+    if (livro->NumeroDeRequisicoes < 0) return false;
+    if (livro->Titulo == NULL) return false;
+
+    return true;
+}
+
+
+
+
+
 // PEDE INPUT AO UTILIZADOR
 // E CRIA UM LIVRO NOVO
 LIVRO *Wizard_Livro(LISTA_CATEGORIAS *hl)
@@ -183,6 +203,7 @@ LIVRO *Wizard_Livro(LISTA_CATEGORIAS *hl)
     char autor[100];
     char area[100];
     int anoDePublicacao;
+    char fornecedor[100];
 
     char temp;
 
@@ -208,7 +229,12 @@ LIVRO *Wizard_Livro(LISTA_CATEGORIAS *hl)
     scanf("%d", &anoDePublicacao);
 
 
-    LIVRO *livro = Criar_Livro_Preenchido(isbn, titulo, autor, area, anoDePublicacao, 0);
+    printf("Insira o Fornecedor do Livro: ");
+    scanf("%c", &temp);
+    scanf("%[^\n]", fornecedor);
+
+
+    LIVRO *livro = Criar_Livro_Preenchido(isbn, titulo, autor, area, anoDePublicacao, 0, fornecedor);
     GuardarLivro(hl, livro);
 
     return livro;

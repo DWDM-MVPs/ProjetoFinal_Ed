@@ -149,86 +149,8 @@ bool ValidarData(DATA *data)
 // LE TODOS OS REQUISITANTES DO FICHEIRO
 void LerRequisitantes(LISTA_REQUISITANTES *hr)
 {
-    FILE *ficheiro = fopen(nomeFic, "r");
-    char linha[120];
-    char linhaInteira[120];
-    char *info[4];
-    char ultimoIdFich[10];
 
-    while(!feof(ficheiro))
-    {
-        if(fgets(linha, 120, fic) != NULL)
-        {
-            int pos = 0;
-            strcpy(linhaInteira, linha);
-            char *elemento = strtok(linha, "\t");
-
-            while (elemento != NULL)
-            {
-                info[pos] = (char *)malloc((strlen(elemento) + 1) * sizeof(char));
-                strcpy(info[pos], elemento);
-                pos++;
-                elemento = strtok(NULL, "\t");
-            }
-
-            int validadeID = validarIdReq(info[0]);
-
-            if(validadeID == 0)
-                registarErro(linhaInteira, 1);
-
-            else
-            {
-                strcpy(ultimoIdFich, info[0]);
-
-                int validadeData = validarDataNasc(info[2]);
-
-                if(validadeData == 0)
-                    registarErro(linhaInteira, 2);
-
-                else
-                {
-                    int tam = strlen(info[3]);
-                    info[3][tam-1] = '\0';
-
-                    int validadeIDFreg = validarIDFreg(info[3], "Freguesias.txt");
-
-                    if(validadeIDFreg == 0)
-                        registarErro(linhaInteira, 3);
-
-                    else
-                    {
-                        NODO *nodoReq = criarNodo();
-                        nodoReq->info = criarReq();
-                        REQUISITANTE *req = nodoReq->info;
-
-                        int tamID = strlen(info[0]);
-                        info[0][tamID] = '\0';
-                        strcpy(req->id, info[0]);
-
-                        strcpy(req->idFreguesia, info[3]);
-
-                        req->nome = info[1];
-
-                        int dia, mes, ano;
-                        int validadeFormato = sscanf(info[2], "%d-%d-%04d", &dia, &mes, &ano);
-                        req->diaNasc = dia;
-                        req->mesNasc = mes;
-                        req->anoNasc = ano;
-
-                        inserirReq(hashingDist, nodoReq);
-                    }
-                }
-            }
-
-            free(info[0]);
-            free(info[2]);
-            free(info[3]);
-        }
-    }
-    fclose(fic);
-    return atoi(ultimoIdFich);
 }
-
 
 
 
@@ -246,6 +168,9 @@ REQUISITANTE *Criar_Requisitante_Preenchido(int id, char nome[100], DATA *data_d
     return requisitante;
 }
 
+
+
+// GUARDA UM REQUISITANTE NA LISTA
 void GuardarRequisitante(LISTA_REQUISITANTES *hr, REQUISITANTE *requisitante)
 {
     if (!hr || !requisitante) return;
@@ -553,6 +478,25 @@ int CalcularModaIdade(LISTA_REQUISITANTES *hr)
     return modaIdade;
 }
 
+
+/*
+struct OCORRENCIAS
+{
+    char Valor[100];
+    int Ocorrencias;
+    OCORRENCIAS *Seguinte;
+};
+
+char* ParteDoNomeComMaisOcorrencias(LISTA_REQUISITANTES *hr)
+{
+    OCORRENCIAS *ocorrencias = (OCORRENCIAS *)malloc(sizeof(OCORRENCIAS));
+
+    char *split = strtok (str," ,.-");
+
+    for(int i = 0; str[i]; i++){
+  str[i] = tolower(str[i]);
+}
+*/
 
 
 #endif
