@@ -92,6 +92,7 @@ void MostrarLivrosPorArea(LISTA_CATEGORIAS *hl)
         {
             // FAZ PRINTF DE TODAS AS INFORMACOES DO LIVRO
             MostrarLivro(livro);
+            printf("\n\n");
 
             // SELECIONA O LIVRO SEGUINTE NO LOOP
             livro = livro->Seguinte;

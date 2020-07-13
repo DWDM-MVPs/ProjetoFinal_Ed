@@ -14,9 +14,20 @@
 #define CLS system("CLS");
 #define PAUSE_CLS PAUSE CLS;
 
-DATA *Criar_Data_Preenchida(int dia, int mes, int ano)
+DATA *Criar_Data()
 {
     DATA *data = (DATA *)malloc(sizeof(DATA));
+
+    data->Dia = 0;
+    data->Mes = 0;
+    data->Ano = 0;
+
+    return data;
+}
+
+DATA *Criar_Data_Preenchida(int dia, int mes, int ano)
+{
+    DATA *data = Criar_Data();
 
     data->Dia = dia;
     data->Mes = mes;
@@ -142,14 +153,6 @@ bool ValidarData(DATA *data)
 
     // SE NAO FALHAR NADA DEVOLVE TRUE, PORQUE A DATA E VALIDA
     return true;
-}
-
-
-
-// LE TODOS OS REQUISITANTES DO FICHEIRO
-void LerRequisitantes(LISTA_REQUISITANTES *hr)
-{
-
 }
 
 

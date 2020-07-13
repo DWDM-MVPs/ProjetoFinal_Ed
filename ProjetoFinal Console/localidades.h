@@ -5,18 +5,21 @@ struct DISTRITO
 {
     int ID;
     char Nome[100];
+    DISTRITO *Seguinte;
 };
 
 struct CONCELHO
 {
     int ID;
     char Nome[100];
+    CONCELHO *Seguinte;
 };
 
 struct FREGUESIA
 {
     int ID;
     char Nome[100];
+    FREGUESIA *Seguinte;
 };
 
 

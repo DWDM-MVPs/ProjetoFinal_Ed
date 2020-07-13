@@ -32,29 +32,53 @@ void MensagemNaoExistemFicheiros()
 
 
 
+extern void LerLivros(LISTA_CATEGORIAS *hl);
 void CarregarLivros(LISTA_CATEGORIAS *hl)
 {
-
+    ImprimirDuplo("A ler Livros...", "Ficheiros");
+    LerLivros(hl);
+    printf("Livros lidos com sucesso!");
+    PAUSE_CLS;
 }
 
+extern void GravarLivros(LISTA_CATEGORIAS *hl);
 void GuardarLivros(LISTA_CATEGORIAS *hl)
 {
-
+    ImprimirDuplo("A gravar Livros...", "Ficheiros");
+    GravarLivros(hl);
+    printf("Livros gravados com sucesso!");
+    PAUSE_CLS;
 }
 
+extern void LerRequisitantes(LISTA_REQUISITANTES *hr);
 void CarregarRequisitantes(LISTA_REQUISITANTES *hr)
 {
-
+    ImprimirDuplo("A ler Requisitantes...", "Ficheiros");
+    LerRequisitantes(hr);
+    printf("Requisitantes lidos com sucesso!");
+    PAUSE_CLS;
 }
 
+extern void GravarRequisitantes(LISTA_REQUISITANTES *hr);
 void GuardarRequisitantes(LISTA_REQUISITANTES *hr)
 {
-
+    ImprimirDuplo("A gravar Requisitantes...", "Ficheiros");
+    GravarRequisitantes(hr);
+    printf("Requisitantes gravados com sucesso!");
+    PAUSE_CLS;
 }
 
+extern void LerConcelhos(LISTA_LOCALIDADES *hz);
+extern void LerDistritos(LISTA_LOCALIDADES *hz);
+extern void LerFreguesias(LISTA_LOCALIDADES *hz);
 void LerLocalidades(LISTA_LOCALIDADES *hz)
 {
-
+    ImprimirDuplo("A ler Localidades...", "Ficheiros");
+    LerConcelhos(hz);
+    LerDistritos(hz);
+    LerFreguesias(hz);
+    printf("Localidades lidas com sucesso!");
+    PAUSE_CLS;
 }
 
 

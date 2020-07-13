@@ -55,6 +55,12 @@ void ImprimirDuplo(const char *funcao, const char *menu)
 
 
 extern void LerLivros(LISTA_CATEGORIAS *hl);
+extern void LerRequisitantes(LISTA_REQUISITANTES *hr);
+extern void LerConcelhos(LISTA_LOCALIDADES *hz);
+extern void LerDistritos(LISTA_LOCALIDADES *hz);
+extern void LerFreguesias(LISTA_LOCALIDADES *hz);
+extern void GravarLivros(LISTA_CATEGORIAS *hl);
+extern void GravarRequisitantes(LISTA_REQUISITANTES *hr);
 // MAIN
 int main()
 {
@@ -65,6 +71,10 @@ int main()
     LISTA_LOCALIDADES *hz = Criar_ListaLocalidades();
 
     LerLivros(hl);
+    LerRequisitantes(hr);
+    LerConcelhos(hz);
+    LerDistritos(hz);
+    LerFreguesias(hz);
 
     int escolha = 0;
     do
@@ -89,6 +99,9 @@ int main()
             case 3: MenuFicheiros(hl, hr, hz); break;
         }
     } while (escolha != 0);
+
+    GravarLivros(hl);
+    GravarRequisitantes(hr);
 
 	return 0;
 }
