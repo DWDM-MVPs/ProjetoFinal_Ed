@@ -7,16 +7,19 @@
 
 #include "livros.h"
 #include "requisitantes.h"
+#include "localidades.h"
 
 #define PAUSE printf("\n\n\n\n\n"); system("PAUSE");
 #define CLS system("CLS");
 #define PAUSE_CLS PAUSE CLS;
 
-extern LISTA_CATEGORIAS *Criar_ListaCategorias();
-extern void MenuLivros(LISTA_CATEGORIAS *hl);
 
-extern LISTA_REQUISITANTES *Criar_ListaRequisitantes();
 extern void MenuRequisitantes(LISTA_REQUISITANTES *hr);
+extern void MenuFicheiros(LISTA_CATEGORIAS *hl, LISTA_REQUISITANTES *hr, LISTA_LOCALIDADES *hz);
+
+extern LISTA_CATEGORIAS *Criar_ListaCategorias();
+extern LISTA_REQUISITANTES *Criar_ListaRequisitantes();
+extern LISTA_LOCALIDADES *Criar_ListaLocalidades();
 
 
 
@@ -26,7 +29,7 @@ void ImprimirMenu(const char *menu)
 
     printf("# =============================================================== #");
     printf("\n# ============================================== > #");
-    printf("\n# ======================= # > %s >", menu);
+    printf("\n# ========================================================================== # > %s >", menu);
     printf("\n# ============================================== > #");
     printf("\n# =============================================================== #\n\n\n\n");
 }
@@ -38,15 +41,8 @@ void ImprimirFuncao(const char *funcao)
 
 void ImprimirDuplo(const char *funcao, const char *menu)
 {
-    CLS;
-
-    printf("# =============================================================== #");
-    printf("\n# ============================================== > #");
-    printf("\n# ======================= # > %s >", menu);
-    printf("\n# ============================================== > #");
-    printf("\n# =============================================================== #\n\n\n\n");
-
-    printf("# ===================== # > %s < # ===================== #\n\n", funcao);
+    ImprimirMenu(menu);
+    ImprimirFuncao(funcao);
 }
 
 
@@ -66,9 +62,31 @@ int main()
 
     LISTA_CATEGORIAS *hl = Criar_ListaCategorias();
     LISTA_REQUISITANTES *hr = Criar_ListaRequisitantes();
+    LISTA_LOCALIDADES *hz = Criar_ListaLocalidades();
 
-    MenuRequisitantes(hr);
-    MenuLivros(hl);
+    int escolha = 0;
+    do
+    {
+        ImprimirMenu("Gestor de Biblioteca");
+
+        printf("\n1. Gerir Livros");
+        printf("\n2. Gerir Requisitantes");
+        printf("\n3. Gerir Ficheiros");
+        printf("\n\n0. Sair");
+        printf("\n\n\n\n\n »---> Escolha: ");
+
+        scanf("%d", &escolha);
+
+        CLS;
+
+        switch(escolha)
+        {
+            extern void MenuLivros(LISTA_CATEGORIAS *hl);
+            case 1: MenuLivros(hl); break;
+            case 2: MenuRequisitantes(hr); break;
+            case 3: MenuFicheiros(hl, hr, hz); break;
+        }
+    } while (escolha != 0);
 
 	return 0;
 }

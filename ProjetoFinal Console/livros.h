@@ -17,6 +17,7 @@ struct LIVRO
     int AnoDePublicacao;
     int NumeroDeRequisicoes;
     LIVRO *Seguinte;
+    bool Disponivel;
 };
 
 

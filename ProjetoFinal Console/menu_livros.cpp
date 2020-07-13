@@ -28,7 +28,7 @@ extern LIVRO *Wizard_Livro(LISTA_CATEGORIAS *hl);
 
 void MensagemNaoExistemLivros()
 {
-    printf("Não existem livros.");
+    printf("Não existem Livros.");
     PAUSE_CLS;
 }
 
@@ -365,16 +365,31 @@ void CriarLivro(LISTA_CATEGORIAS *hl)
 
 void MenuLivros(LISTA_CATEGORIAS *hl)
 {
-    ImprimirMenu("Livros");
+    int escolha = 0;
+    do
+    {
+        ImprimirMenu("Gerir Livros");
 
+        printf("\n1. Criar Livro");
+        printf("\n2. Listar Livros por Area");
+        printf("\n3. Mostrar Area com mais Livros");
+        printf("\n4. Pesquisar Livro por ISBN");
+        printf("\n5. Encontrar Livro mais recente");
+        printf("\n\n0. Voltar");
+        printf("\n\n\n\n\n »---> Escolha: ");
 
-    CriarLivro(hl);
+        scanf("%d", &escolha);
 
-    MostrarLivrosPorArea(hl);
-    MostrarAreaComMaisLivros(hl);
+        CLS;
 
-    PesquisarLivroPorISBN(hl);
-
-    EncontrarLivroMaisRecente(hl);
+        switch(escolha)
+        {
+            case 1: CriarLivro(hl); break;
+            case 2: MostrarLivrosPorArea(hl); break;
+            case 3: MostrarAreaComMaisLivros(hl); break;
+            case 4: PesquisarLivroPorISBN(hl); break;
+            case 5: EncontrarLivroMaisRecente(hl); break;
+        }
+    } while (escolha != 0);
 }
 #endif

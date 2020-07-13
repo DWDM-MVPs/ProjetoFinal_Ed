@@ -12,11 +12,15 @@
 				<Option compiler="gcc" />
 			</Target>
 		</Build>
+		<Unit filename="ficheiros.cpp" />
 		<Unit filename="livros.cpp" />
 		<Unit filename="livros.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
+		<Unit filename="localidades.cpp" />
+		<Unit filename="localidades.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="menu_ficheiros.cpp" />
 		<Unit filename="menu_livros.cpp" />
 		<Unit filename="menu_requisitantes.cpp" />
 		<Unit filename="requisitantes.cpp">

@@ -16,42 +16,40 @@ struct DATA
 
 
 
+struct REQUISICAO
+{
+    char ID_Requisitante[9];
+    char ISBN_Livro;
+    DATA *DataRequisicao;
+    REQUISICAO *Seguinte;
+};
+
+struct LISTA_REQUISICOES
+{
+    REQUISICAO *Inicio;
+    int NumeroTotalDeRequisicoes;
+    int RequisicoesAtivas;
+};
+
+
+
+
+
 struct REQUISITANTE
 {
     int ID;
     char Nome[100];
     DATA *DataDeNascimento;
-    int NumeroRequisicoes;
-    int ID_Freguesia;
+    char ID_Freguesia[6];
     REQUISITANTE *Seguinte;
+    LISTA_REQUISICOES *ListaRequisicoes;
+
 };
-
-
 
 struct LISTA_REQUISITANTES
 {
     REQUISITANTE *Inicio;
     int Quantidade;
-};
-
-
-
-
-
-struct REQUISICAO
-{
-    char IdRequisitante[9];
-    char IsbnLivro;
-    DATA *DataRequisicao;
-    REQUISICAO *Seguinte;
-};
-
-
-
-struct LISTA_REQUISICOES
-{
-    REQUISICAO *Inicio;
-    int QuantidadeRequisicoes;
 };
 
 #endif
