@@ -18,8 +18,8 @@ struct DATA
 
 struct REQUISICAO
 {
-    char ID_Requisitante[9];
-    char ISBN_Livro;
+    int ID_Requisitante;
+    int ISBN_Livro;
     DATA *DataRequisicao;
     REQUISICAO *Seguinte;
 };

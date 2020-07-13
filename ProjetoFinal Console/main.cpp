@@ -19,6 +19,7 @@ extern void MenuFicheiros(LISTA_CATEGORIAS *hl, LISTA_REQUISITANTES *hr, LISTA_L
 
 extern LISTA_CATEGORIAS *Criar_ListaCategorias();
 extern LISTA_REQUISITANTES *Criar_ListaRequisitantes();
+extern LISTA_REQUISICOES *Criar_ListaRequisicoes();
 extern LISTA_LOCALIDADES *Criar_ListaLocalidades();
 
 
@@ -47,6 +48,70 @@ void ImprimirDuplo(const char *funcao, const char *menu)
 
 
 
+void GuardarRequisicao(LISTA_REQUISICOES *hs, REQUISICAO *requisicao)
+{
+    requisicao->Seguinte = hs->Inicio;
+    hs->Inicio = requisicao;
+
+    hs->NumeroTotalDeRequisicoes = hs->NumeroTotalDeRequisicoes + 1;
+    hs->RequisicoesAtivas = hs->RequisicoesAtivas + 1;
+}
+
+
+extern REQUISICAO *Criar_Requisicao();
+extern bool ExisteISBN(LISTA_CATEGORIAS *hl, int isbn);
+extern bool ExisteID(LISTA_REQUISITANTES *hr, int id);
+extern DATA *Criar_Data_Preenchida(int dia, int mes, int ano);
+void CriarRequisicao(LISTA_CATEGORIAS *hl, LISTA_REQUISITANTES *hr, LISTA_REQUISICOES *hs)
+{
+    ImprimirDuplo("Criar Requisição", "Requisições");
+
+    int isbn = 0;
+    int id = 0;
+
+    printf("Insira o ID do Requisitante: ");
+    scanf("%d", &id);
+
+    printf("Insira o ISBN do Livro: ");
+    scanf("%d", &isbn);
+
+    if (!ExisteISBN(hl, isbn))
+    {
+        printf("\n\nNão existe nenhum Livro com esse ISBN.");
+        PAUSE_CLS;
+        return;
+    }
+    if (!ExisteID(hr, id))
+    {
+        printf("\n\nNão existe nenhum Requisitante com esse ID.");
+        PAUSE_CLS;
+        return;
+    }
+
+    REQUISITANTE *requisitante = hr->Inicio;
+
+    while (requisitante)
+    {
+        if (requisitante->ID == id)
+        {
+            REQUISICAO *requisicao = Criar_Requisicao();
+
+            time_t tempo = time(NULL);
+            struct tm tm = *localtime(&tempo);
+
+            requisicao->DataRequisicao = Criar_Data_Preenchida(tm.tm_mday, tm.tm_mon, tm.tm_year);
+            requisicao->ID_Requisitante = id;
+            requisicao->ISBN_Livro = isbn;
+
+            GuardarRequisicao(hs, requisicao);
+        }
+
+        requisitante = requisitante->Seguinte;
+    }
+
+    printf("\n\nRequisição criada com sucesso.");
+}
+
 
 
 
@@ -68,6 +133,7 @@ int main()
 
     LISTA_CATEGORIAS *hl = Criar_ListaCategorias();
     LISTA_REQUISITANTES *hr = Criar_ListaRequisitantes();
+    LISTA_REQUISICOES *hs = Criar_ListaRequisicoes();
     LISTA_LOCALIDADES *hz = Criar_ListaLocalidades();
 
     LerLivros(hl);
@@ -84,6 +150,7 @@ int main()
         printf("\n1. Gerir Livros");
         printf("\n2. Gerir Requisitantes");
         printf("\n3. Gerir Ficheiros");
+        printf("\n4. Criar Requisição");
         printf("\n\n0. Sair");
         printf("\n\n\n\n\n »---> Escolha: ");
 
@@ -97,6 +164,7 @@ int main()
             case 1: MenuLivros(hl); break;
             case 2: MenuRequisitantes(hr); break;
             case 3: MenuFicheiros(hl, hr, hz); break;
+            case 4: CriarRequisicao(hl, hr, hs); break;
         }
     } while (escolha != 0);
 

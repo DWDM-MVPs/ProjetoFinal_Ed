@@ -62,6 +62,8 @@ REQUISICAO *Criar_Requisicao()
 {
     REQUISICAO *requisicao = (REQUISICAO *)malloc(sizeof(REQUISICAO));
 
+    requisicao->ID_Requisitante = 0;
+    requisicao->ISBN_Livro = 0;
     requisicao->DataRequisicao = NULL;
     requisicao->Seguinte = NULL;
 
@@ -77,6 +79,21 @@ LISTA_REQUISICOES *Criar_ListaRequisicoes()
     lista_requisicoes->RequisicoesAtivas = 0;
 
     return lista_requisicoes;
+}
+
+
+bool ExisteID(LISTA_REQUISITANTES *hr, int id)
+{
+    REQUISITANTE *requisitante = hr->Inicio;
+
+    while (requisitante)
+    {
+        if (requisitante->ID) return true;
+
+        requisitante = requisitante->Seguinte;
+    }
+
+    return false;
 }
 
 
